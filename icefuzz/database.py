@@ -64,7 +64,7 @@ def read_database(filename, tile_type):
                     line[1] = re.sub(r"glb_netwk_", "1k_glb_netwk_", line[1])
                 raw_db.append((bit, (line[0], line[1])))
             elif line[0] == "Cascade":
-                match = re.match("(MULT\d|LH)_LC0(\d)_inmux02_5", line[1])
+                match = re.match("LH_LC0(\d)_inmux02_5", line[1])
                 if match:
                     raw_db.append((bit, ("buffer", "wire_logic_cluster/lc_%d/lout" % (int(match.group(1))-1), "input_2_%s" % match.group(1))))
                 else:
@@ -157,11 +157,11 @@ for device_class in ["5k", "8k"]:
   with open("database_ramt_%s.txt" % (device_class, ), "w") as f:
       for entry in read_database("bitdata_ramt_%s.txt" % (device_class, ), "ramt_" + device_class):
           print("\t".join(entry), file=f)
-if device_class == "5k":
-    for dsp_idx in range(4):
-      with open("database_dsp%d_5k.txt" % (dsp_idx, ), "w") as f:
-          for entry in read_database("bitdata_dsp%d_5k.txt" % (dsp_idx, ), "dsp%d_5" % (dsp_idx, )):
-              print("\t".join(entry), file=f)
-    with open("database_ipcon.txt", "w") as f:
-        for entry in read_database("bitdata_ipcon.txt", "ipcon"):
-            print("\t".join(entry), file=f)
+
+for dsp_idx in range(4):
+  with open("database_dsp%d_5k.txt" % (dsp_idx, ), "w") as f:
+      for entry in read_database("bitdata_dsp%d_5k.txt" % (dsp_idx, ), "dsp%d_5" % (dsp_idx, )):
+          print("\t".join(entry), file=f)
+with open("database_ipcon_5k.txt", "w") as f:
+    for entry in read_database("bitdata_ipcon_5k.txt", "ipcon"):
+        print("\t".join(entry), file=f)
