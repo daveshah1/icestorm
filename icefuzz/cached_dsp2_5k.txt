@@ -113,6 +113,7 @@
 (1 7) routing glb_netwk_5 <X> glb2local_0
 (1 7) routing glb_netwk_6 <X> glb2local_0
 (1 7) routing glb_netwk_7 <X> glb2local_0
+(1 8) Enable bit of Mux _local_links/global_mux_1 => glb_netwk_0 glb2local_1
 (1 8) Enable bit of Mux _local_links/global_mux_1 => glb_netwk_1 glb2local_1
 (1 8) Enable bit of Mux _local_links/global_mux_1 => glb_netwk_2 glb2local_1
 (1 8) Enable bit of Mux _local_links/global_mux_1 => glb_netwk_3 glb2local_1
@@ -145,6 +146,7 @@
 (10 13) routing sp4_h_r_5 <X> sp4_v_b_10
 (10 13) routing sp4_v_t_39 <X> sp4_v_b_10
 (10 13) routing sp4_v_t_42 <X> sp4_v_b_10
+(10 14) routing sp4_h_r_2 <X> sp4_h_l_47
 (10 14) routing sp4_v_t_41 <X> sp4_h_l_47
 (10 15) routing sp4_h_l_40 <X> sp4_v_t_47
 (10 15) routing sp4_h_r_4 <X> sp4_v_t_47
@@ -180,6 +182,7 @@
 (11 0) routing sp4_h_r_9 <X> sp4_v_b_2
 (11 0) routing sp4_v_t_43 <X> sp4_v_b_2
 (11 0) routing sp4_v_t_46 <X> sp4_v_b_2
+(11 1) routing sp4_h_l_39 <X> sp4_h_r_2
 (11 1) routing sp4_h_l_43 <X> sp4_h_r_2
 (11 1) routing sp4_v_b_8 <X> sp4_h_r_2
 (11 10) routing sp4_h_l_38 <X> sp4_v_t_45
@@ -227,6 +230,7 @@
 (11 8) routing sp4_h_r_3 <X> sp4_v_b_8
 (11 8) routing sp4_v_t_37 <X> sp4_v_b_8
 (11 8) routing sp4_v_t_40 <X> sp4_v_b_8
+(11 9) routing sp4_v_b_2 <X> sp4_h_r_8
 (11 9) routing sp4_v_b_8 <X> sp4_h_r_8
 (12 0) routing sp4_h_l_46 <X> sp4_h_r_2
 (12 0) routing sp4_v_b_8 <X> sp4_h_r_2
@@ -256,6 +260,7 @@
 (12 15) routing sp4_h_r_11 <X> sp4_v_t_46
 (12 15) routing sp4_h_r_5 <X> sp4_v_t_46
 (12 15) routing sp4_v_b_8 <X> sp4_v_t_46
+(12 2) routing sp4_v_b_2 <X> sp4_h_l_39
 (12 2) routing sp4_v_t_39 <X> sp4_h_l_39
 (12 2) routing sp4_v_t_45 <X> sp4_h_l_39
 (12 3) routing sp4_h_l_39 <X> sp4_v_t_39
@@ -276,6 +281,7 @@
 (12 7) routing sp4_h_r_5 <X> sp4_v_t_40
 (12 7) routing sp4_v_b_2 <X> sp4_v_t_40
 (12 8) routing sp4_h_l_40 <X> sp4_h_r_8
+(12 8) routing sp4_v_b_2 <X> sp4_h_r_8
 (12 8) routing sp4_v_b_8 <X> sp4_h_r_8
 (12 8) routing sp4_v_t_45 <X> sp4_h_r_8
 (12 9) routing sp4_h_l_39 <X> sp4_v_b_8
@@ -334,6 +340,7 @@
 (13 8) routing sp4_v_t_37 <X> sp4_v_b_8
 (13 8) routing sp4_v_t_45 <X> sp4_v_b_8
 (13 9) routing sp4_h_l_40 <X> sp4_h_r_8
+(13 9) routing sp4_v_b_2 <X> sp4_h_r_8
 (13 9) routing sp4_v_t_38 <X> sp4_h_r_8
 (14 0) routing bnr_op_0 <X> lc_trk_g0_0
 (14 0) routing lft_op_0 <X> lc_trk_g0_0
@@ -543,6 +550,7 @@
 (15 8) routing sp4_h_l_20 <X> lc_trk_g2_1
 (15 8) routing sp4_h_l_28 <X> lc_trk_g2_1
 (15 8) routing sp4_v_b_41 <X> lc_trk_g2_1
+(15 8) routing tnl_op_1 <X> lc_trk_g2_1
 (15 9) routing rgt_op_0 <X> lc_trk_g2_0
 (15 9) routing sp12_v_b_0 <X> lc_trk_g2_0
 (15 9) routing sp4_h_l_13 <X> lc_trk_g2_0
@@ -879,6 +887,7 @@
 (17 8) Enable bit of Mux _local_links/g2_mux_1 => sp4_v_b_25 lc_trk_g2_1
 (17 8) Enable bit of Mux _local_links/g2_mux_1 => sp4_v_b_41 lc_trk_g2_1
 (17 8) Enable bit of Mux _local_links/g2_mux_1 => sp4_v_t_20 lc_trk_g2_1
+(17 8) Enable bit of Mux _local_links/g2_mux_1 => tnl_op_1 lc_trk_g2_1
 (17 9) Enable bit of Mux _local_links/g2_mux_0 => bnl_op_0 lc_trk_g2_0
 (17 9) Enable bit of Mux _local_links/g2_mux_0 => rgt_op_0 lc_trk_g2_0
 (17 9) Enable bit of Mux _local_links/g2_mux_0 => sp12_v_b_0 lc_trk_g2_0
@@ -1006,6 +1015,7 @@
 (18 9) routing sp4_h_l_28 <X> lc_trk_g2_1
 (18 9) routing sp4_r_v_b_33 <X> lc_trk_g2_1
 (18 9) routing sp4_v_t_20 <X> lc_trk_g2_1
+(18 9) routing tnl_op_1 <X> lc_trk_g2_1
 (19 0) Enable bit of Mux _span_links/cross_mux_vert_1 => sp12_v_b_3 sp4_v_t_0
 (19 1) Enable bit of Mux _span_links/cross_mux_vert_0 => sp12_v_b_1 sp4_v_t_1
 (19 10) Enable bit of Mux _span_links/cross_mux_vert_11 => sp12_v_b_23 sp4_v_b_23
@@ -1071,6 +1081,7 @@
 (21 11) routing sp4_h_l_34 <X> lc_trk_g2_7
 (21 11) routing sp4_r_v_b_39 <X> lc_trk_g2_7
 (21 11) routing sp4_v_t_26 <X> lc_trk_g2_7
+(21 11) routing tnl_op_7 <X> lc_trk_g2_7
 (21 12) routing bnl_op_3 <X> lc_trk_g3_3
 (21 12) routing rgt_op_3 <X> lc_trk_g3_3
 (21 12) routing sp12_v_b_3 <X> lc_trk_g3_3
@@ -1195,6 +1206,7 @@
 (22 10) Enable bit of Mux _local_links/g2_mux_7 => sp4_v_b_47 lc_trk_g2_7
 (22 10) Enable bit of Mux _local_links/g2_mux_7 => sp4_v_t_18 lc_trk_g2_7
 (22 10) Enable bit of Mux _local_links/g2_mux_7 => sp4_v_t_26 lc_trk_g2_7
+(22 10) Enable bit of Mux _local_links/g2_mux_7 => tnl_op_7 lc_trk_g2_7
 (22 10) Enable bit of Mux _local_links/g2_mux_7 => tnr_op_7 lc_trk_g2_7
 (22 11) Enable bit of Mux _local_links/g2_mux_6 => bnl_op_6 lc_trk_g2_6
 (22 11) Enable bit of Mux _local_links/g2_mux_6 => sp12_v_b_14 lc_trk_g2_6
@@ -1237,6 +1249,7 @@
 (22 13) Enable bit of Mux _local_links/g3_mux_2 => sp4_v_t_15 lc_trk_g3_2
 (22 13) Enable bit of Mux _local_links/g3_mux_2 => sp4_v_t_23 lc_trk_g3_2
 (22 13) Enable bit of Mux _local_links/g3_mux_2 => sp4_v_t_31 lc_trk_g3_2
+(22 13) Enable bit of Mux _local_links/g3_mux_2 => tnl_op_2 lc_trk_g3_2
 (22 13) Enable bit of Mux _local_links/g3_mux_2 => tnr_op_2 lc_trk_g3_2
 (22 14) Enable bit of Mux _local_links/g3_mux_7 => bnl_op_7 lc_trk_g3_7
 (22 14) Enable bit of Mux _local_links/g3_mux_7 => rgt_op_7 lc_trk_g3_7
@@ -1520,6 +1533,7 @@
 (24 10) routing sp4_h_l_34 <X> lc_trk_g2_7
 (24 10) routing sp4_h_r_39 <X> lc_trk_g2_7
 (24 10) routing sp4_v_b_47 <X> lc_trk_g2_7
+(24 10) routing tnl_op_7 <X> lc_trk_g2_7
 (24 10) routing tnr_op_7 <X> lc_trk_g2_7
 (24 11) routing sp12_v_t_5 <X> lc_trk_g2_6
 (24 11) routing sp4_h_l_27 <X> lc_trk_g2_6
@@ -1541,6 +1555,7 @@
 (24 13) routing sp4_h_l_23 <X> lc_trk_g3_2
 (24 13) routing sp4_h_r_42 <X> lc_trk_g3_2
 (24 13) routing sp4_v_t_31 <X> lc_trk_g3_2
+(24 13) routing tnl_op_2 <X> lc_trk_g3_2
 (24 13) routing tnr_op_2 <X> lc_trk_g3_2
 (24 14) routing rgt_op_7 <X> lc_trk_g3_7
 (24 14) routing sp12_v_t_4 <X> lc_trk_g3_7
@@ -1649,6 +1664,7 @@
 (25 13) routing sp4_h_r_42 <X> lc_trk_g3_2
 (25 13) routing sp4_r_v_b_42 <X> lc_trk_g3_2
 (25 13) routing sp4_v_t_23 <X> lc_trk_g3_2
+(25 13) routing tnl_op_2 <X> lc_trk_g3_2
 (25 14) routing bnl_op_6 <X> lc_trk_g3_6
 (25 14) routing rgt_op_6 <X> lc_trk_g3_6
 (25 14) routing sp12_v_t_5 <X> lc_trk_g3_6
@@ -2626,6 +2642,7 @@
 (4 4) routing sp4_h_l_44 <X> sp4_v_b_3
 (4 4) routing sp4_v_t_38 <X> sp4_v_b_3
 (4 4) routing sp4_v_t_42 <X> sp4_v_b_3
+(4 5) routing sp4_h_l_37 <X> sp4_h_r_3
 (4 5) routing sp4_v_b_9 <X> sp4_h_r_3
 (4 5) routing sp4_v_t_47 <X> sp4_h_r_3
 (4 6) routing sp4_h_r_3 <X> sp4_v_t_38
@@ -2639,6 +2656,7 @@
 (4 8) routing sp4_h_l_43 <X> sp4_v_b_6
 (4 8) routing sp4_v_t_43 <X> sp4_v_b_6
 (4 8) routing sp4_v_t_47 <X> sp4_v_b_6
+(4 9) routing sp4_h_l_38 <X> sp4_h_r_6
 (4 9) routing sp4_v_t_36 <X> sp4_h_r_6
 (42 0) LC_0 Logic Functioning bit
 (42 1) LC_0 Logic Functioning bit
@@ -2752,6 +2770,8 @@
 (5 3) routing sp4_h_r_0 <X> sp4_v_t_37
 (5 3) routing sp4_h_r_6 <X> sp4_v_t_37
 (5 3) routing sp4_v_b_9 <X> sp4_v_t_37
+(5 4) routing sp4_h_l_37 <X> sp4_h_r_3
+(5 4) routing sp4_v_b_3 <X> sp4_h_r_3
 (5 4) routing sp4_v_b_9 <X> sp4_h_r_3
 (5 4) routing sp4_v_t_38 <X> sp4_h_r_3
 (5 5) routing sp4_h_l_38 <X> sp4_v_b_3
@@ -2766,6 +2786,7 @@
 (5 7) routing sp4_h_r_3 <X> sp4_v_t_38
 (5 7) routing sp4_h_r_9 <X> sp4_v_t_38
 (5 7) routing sp4_v_b_0 <X> sp4_v_t_38
+(5 8) routing sp4_h_l_38 <X> sp4_h_r_6
 (5 8) routing sp4_v_b_6 <X> sp4_h_r_6
 (5 8) routing sp4_v_t_43 <X> sp4_h_r_6
 (5 9) routing sp4_h_l_37 <X> sp4_v_b_6
@@ -2864,6 +2885,7 @@
 (6 4) routing sp4_v_t_37 <X> sp4_v_b_3
 (6 4) routing sp4_v_t_42 <X> sp4_v_b_3
 (6 5) routing sp4_h_l_38 <X> sp4_h_r_3
+(6 5) routing sp4_v_b_3 <X> sp4_h_r_3
 (6 5) routing sp4_v_b_9 <X> sp4_h_r_3
 (6 6) routing sp4_h_l_47 <X> sp4_v_t_38
 (6 6) routing sp4_h_r_9 <X> sp4_v_t_38
@@ -2905,6 +2927,7 @@
 (8 13) routing sp4_h_r_10 <X> sp4_v_b_10
 (8 13) routing sp4_v_t_42 <X> sp4_v_b_10
 (8 14) routing sp4_h_r_10 <X> sp4_h_l_47
+(8 14) routing sp4_h_r_2 <X> sp4_h_l_47
 (8 14) routing sp4_v_t_41 <X> sp4_h_l_47
 (8 14) routing sp4_v_t_47 <X> sp4_h_l_47
 (8 15) routing sp4_h_l_47 <X> sp4_v_t_47
@@ -2964,6 +2987,7 @@
 (9 15) routing sp4_v_b_10 <X> sp4_v_t_47
 (9 15) routing sp4_v_b_2 <X> sp4_v_t_47
 (9 2) routing sp4_h_r_10 <X> sp4_h_l_36
+(9 2) routing sp4_v_b_1 <X> sp4_h_l_36
 (9 2) routing sp4_v_t_36 <X> sp4_h_l_36
 (9 3) routing sp4_h_r_1 <X> sp4_v_t_36
 (9 3) routing sp4_h_r_7 <X> sp4_v_t_36

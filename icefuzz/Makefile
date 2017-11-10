@@ -44,6 +44,7 @@ ifneq ($(DEVICECLASS),384)
 endif
 ifeq ($(DEVICECLASS),5k)
  TESTS += dsp
+ TESTS += upip
 endif
 database: bitdata_io.txt bitdata_logic.txt bitdata_ramb$(RAM_SUFFIX).txt bitdata_ramt$(RAM_SUFFIX).txt bitdata_dsp0_5k.txt bitdata_dsp1_5k.txt bitdata_dsp2_5k.txt bitdata_dsp3_5k.txt bitdata_ipcon_5k.txt
 ifneq ($(RAM_SUFFIX),)

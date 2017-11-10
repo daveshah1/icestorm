@@ -64,6 +64,7 @@ elif device_class == "5k":
     num_ramb40 = 30
     num_iobanks = 2
     num_dsp = 8
+    num_spram256ka = 4
     #TODO(tannewt): Add 39, 40, 41 to this list. It causes placement failures for some reason.
     # Also add 14 15 16 17 which are constrained to SPI.
     #TODO(daveshah1): Add back I3C IO 23 which cause placement failures when assigned to
@@ -76,7 +77,7 @@ elif device_class == "5k":
 
     #TODO(tannewt): Add 39, 40, 41 to this list. It causes placement failures for some reason.
     gpins = "20 35 37 44".split()
-
+    led_pins = "39 40 41".split()
 def output_makefile(working_dir, fuzzname):
   with open(working_dir + "/Makefile", "w") as f:
       print("all: %s" % " ".join(["%s_%02d.bin" % (fuzzname, i) for i in range(num)]), file=f)

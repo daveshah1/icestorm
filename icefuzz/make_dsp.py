@@ -23,11 +23,13 @@ allowed_configs = ["0010000010000001001110110", "1110000010000001001110110", "00
                    "0000000011000001111110110", "1100000011000001111110110", "0000000011000001110000110", "0010000101000010111111111",
                    "0000001001100100111111111", "0001001001100100111111111", "0001101001100100111111111", "0001111000101100000000000"]
 
-#coverage = set()
-#for c in allowed_configs:
-#    for i in range(25):
-#        if c[i] == "1":
-#            coverage.add(i)
+coverage = set()
+for c in allowed_configs:
+    for i in range(25):
+        if c[i] == "1":
+            coverage.add(i)
+
+assert len(coverage) >= 24
 
 #print(len(coverage))
 #print(coverage)
