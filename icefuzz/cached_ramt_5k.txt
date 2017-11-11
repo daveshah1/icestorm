@@ -225,6 +225,7 @@
 (12 15) routing sp4_h_r_5 <X> sp4_v_t_46
 (12 15) routing sp4_v_b_8 <X> sp4_v_t_46
 (12 2) routing sp4_h_r_11 <X> sp4_h_l_39
+(12 2) routing sp4_v_b_2 <X> sp4_h_l_39
 (12 2) routing sp4_v_t_39 <X> sp4_h_l_39
 (12 2) routing sp4_v_t_45 <X> sp4_h_l_39
 (12 3) routing sp4_h_l_39 <X> sp4_v_t_39

@@ -94,6 +94,7 @@
 (1 2) routing glb_netwk_5 <X> wire_mult/lc_7/clk
 (1 2) routing glb_netwk_6 <X> wire_mult/lc_7/clk
 (1 2) routing glb_netwk_7 <X> wire_mult/lc_7/clk
+(1 3) Enable bit of Mux _span_links/cross_mux_horz_5 => sp12_h_l_9 sp4_h_r_17
 (1 4) Enable bit of Mux _global_links/ce_mux => lc_trk_g0_2 wire_mult/lc_7/cen
 (1 4) Enable bit of Mux _global_links/ce_mux => lc_trk_g1_3 wire_mult/lc_7/cen
 (1 4) Enable bit of Mux _global_links/ce_mux => lc_trk_g2_2 wire_mult/lc_7/cen
@@ -147,6 +148,7 @@
 (10 13) routing sp4_v_t_39 <X> sp4_v_b_10
 (10 13) routing sp4_v_t_42 <X> sp4_v_b_10
 (10 14) routing sp4_h_r_2 <X> sp4_h_l_47
+(10 14) routing sp4_v_b_5 <X> sp4_h_l_47
 (10 14) routing sp4_v_t_41 <X> sp4_h_l_47
 (10 15) routing sp4_h_l_40 <X> sp4_v_t_47
 (10 15) routing sp4_h_r_4 <X> sp4_v_t_47
@@ -154,6 +156,7 @@
 (10 15) routing sp4_v_b_7 <X> sp4_v_t_47
 (10 2) routing sp4_h_r_10 <X> sp4_h_l_36
 (10 2) routing sp4_v_b_8 <X> sp4_h_l_36
+(10 2) routing sp4_v_t_42 <X> sp4_h_l_36
 (10 3) routing sp4_h_l_45 <X> sp4_v_t_36
 (10 3) routing sp4_h_r_7 <X> sp4_v_t_36
 (10 3) routing sp4_v_b_10 <X> sp4_v_t_36
@@ -184,6 +187,7 @@
 (11 0) routing sp4_v_t_46 <X> sp4_v_b_2
 (11 1) routing sp4_h_l_39 <X> sp4_h_r_2
 (11 1) routing sp4_h_l_43 <X> sp4_h_r_2
+(11 1) routing sp4_v_b_2 <X> sp4_h_r_2
 (11 1) routing sp4_v_b_8 <X> sp4_h_r_2
 (11 10) routing sp4_h_l_38 <X> sp4_v_t_45
 (11 10) routing sp4_h_r_2 <X> sp4_v_t_45
@@ -191,6 +195,7 @@
 (11 10) routing sp4_v_b_5 <X> sp4_v_t_45
 (11 11) routing sp4_h_r_0 <X> sp4_h_l_45
 (11 11) routing sp4_h_r_8 <X> sp4_h_l_45
+(11 11) routing sp4_v_t_39 <X> sp4_h_l_45
 (11 11) routing sp4_v_t_45 <X> sp4_h_l_45
 (11 12) routing sp4_h_l_40 <X> sp4_v_b_11
 (11 12) routing sp4_h_r_6 <X> sp4_v_b_11
@@ -220,19 +225,23 @@
 (11 5) routing sp4_h_l_40 <X> sp4_h_r_5
 (11 5) routing sp4_h_l_44 <X> sp4_h_r_5
 (11 5) routing sp4_v_b_11 <X> sp4_h_r_5
+(11 5) routing sp4_v_b_5 <X> sp4_h_r_5
 (11 6) routing sp4_h_l_37 <X> sp4_v_t_40
 (11 6) routing sp4_h_r_11 <X> sp4_v_t_40
 (11 6) routing sp4_v_b_2 <X> sp4_v_t_40
 (11 6) routing sp4_v_b_9 <X> sp4_v_t_40
+(11 7) routing sp4_h_r_9 <X> sp4_h_l_40
 (11 7) routing sp4_v_t_40 <X> sp4_h_l_40
 (11 7) routing sp4_v_t_46 <X> sp4_h_l_40
 (11 8) routing sp4_h_l_39 <X> sp4_v_b_8
 (11 8) routing sp4_h_r_3 <X> sp4_v_b_8
 (11 8) routing sp4_v_t_37 <X> sp4_v_b_8
 (11 8) routing sp4_v_t_40 <X> sp4_v_b_8
+(11 9) routing sp4_h_l_37 <X> sp4_h_r_8
 (11 9) routing sp4_v_b_2 <X> sp4_h_r_8
 (11 9) routing sp4_v_b_8 <X> sp4_h_r_8
 (12 0) routing sp4_h_l_46 <X> sp4_h_r_2
+(12 0) routing sp4_v_b_2 <X> sp4_h_r_2
 (12 0) routing sp4_v_b_8 <X> sp4_h_r_2
 (12 0) routing sp4_v_t_39 <X> sp4_h_r_2
 (12 1) routing sp4_h_l_39 <X> sp4_v_b_2
@@ -240,6 +249,7 @@
 (12 1) routing sp4_h_r_2 <X> sp4_v_b_2
 (12 1) routing sp4_v_t_46 <X> sp4_v_b_2
 (12 10) routing sp4_v_b_8 <X> sp4_h_l_45
+(12 10) routing sp4_v_t_39 <X> sp4_h_l_45
 (12 10) routing sp4_v_t_45 <X> sp4_h_l_45
 (12 11) routing sp4_h_l_45 <X> sp4_v_t_45
 (12 11) routing sp4_h_r_2 <X> sp4_v_t_45
@@ -254,6 +264,7 @@
 (12 13) routing sp4_h_r_11 <X> sp4_v_b_11
 (12 13) routing sp4_v_t_45 <X> sp4_v_b_11
 (12 14) routing sp4_h_r_8 <X> sp4_h_l_46
+(12 14) routing sp4_v_b_11 <X> sp4_h_l_46
 (12 14) routing sp4_v_t_40 <X> sp4_h_l_46
 (12 14) routing sp4_v_t_46 <X> sp4_h_l_46
 (12 15) routing sp4_h_l_46 <X> sp4_v_t_46
@@ -268,12 +279,14 @@
 (12 3) routing sp4_h_r_8 <X> sp4_v_t_39
 (12 3) routing sp4_v_b_11 <X> sp4_v_t_39
 (12 4) routing sp4_v_b_11 <X> sp4_h_r_5
+(12 4) routing sp4_v_b_5 <X> sp4_h_r_5
 (12 4) routing sp4_v_t_40 <X> sp4_h_r_5
 (12 5) routing sp4_h_l_40 <X> sp4_v_b_5
 (12 5) routing sp4_h_l_46 <X> sp4_v_b_5
 (12 5) routing sp4_h_r_5 <X> sp4_v_b_5
 (12 5) routing sp4_v_t_39 <X> sp4_v_b_5
 (12 6) routing sp4_h_r_2 <X> sp4_h_l_40
+(12 6) routing sp4_v_b_5 <X> sp4_h_l_40
 (12 6) routing sp4_v_t_40 <X> sp4_h_l_40
 (12 6) routing sp4_v_t_46 <X> sp4_h_l_40
 (12 7) routing sp4_h_l_40 <X> sp4_v_t_40
@@ -301,6 +314,8 @@
 (13 10) routing sp4_v_b_0 <X> sp4_v_t_45
 (13 10) routing sp4_v_b_8 <X> sp4_v_t_45
 (13 11) routing sp4_h_r_0 <X> sp4_h_l_45
+(13 11) routing sp4_v_b_3 <X> sp4_h_l_45
+(13 11) routing sp4_v_t_39 <X> sp4_h_l_45
 (13 12) routing sp4_h_l_40 <X> sp4_v_b_11
 (13 12) routing sp4_h_l_46 <X> sp4_v_b_11
 (13 12) routing sp4_v_t_38 <X> sp4_v_b_11
@@ -320,6 +335,7 @@
 (13 2) routing sp4_v_b_2 <X> sp4_v_t_39
 (13 2) routing sp4_v_b_6 <X> sp4_v_t_39
 (13 3) routing sp4_h_r_6 <X> sp4_h_l_39
+(13 3) routing sp4_v_b_9 <X> sp4_h_l_39
 (13 3) routing sp4_v_t_45 <X> sp4_h_l_39
 (13 4) routing sp4_h_l_40 <X> sp4_v_b_5
 (13 4) routing sp4_h_l_46 <X> sp4_v_b_5
@@ -333,12 +349,14 @@
 (13 6) routing sp4_v_b_5 <X> sp4_v_t_40
 (13 6) routing sp4_v_b_9 <X> sp4_v_t_40
 (13 7) routing sp4_h_r_2 <X> sp4_h_l_40
+(13 7) routing sp4_h_r_9 <X> sp4_h_l_40
 (13 7) routing sp4_v_b_0 <X> sp4_h_l_40
 (13 7) routing sp4_v_t_46 <X> sp4_h_l_40
 (13 8) routing sp4_h_l_39 <X> sp4_v_b_8
 (13 8) routing sp4_h_l_45 <X> sp4_v_b_8
 (13 8) routing sp4_v_t_37 <X> sp4_v_b_8
 (13 8) routing sp4_v_t_45 <X> sp4_v_b_8
+(13 9) routing sp4_h_l_37 <X> sp4_h_r_8
 (13 9) routing sp4_h_l_40 <X> sp4_h_r_8
 (13 9) routing sp4_v_b_2 <X> sp4_h_r_8
 (13 9) routing sp4_v_t_38 <X> sp4_h_r_8
@@ -1022,6 +1040,7 @@
 (19 11) Enable bit of Mux _span_links/cross_mux_vert_10 => sp12_v_t_18 sp4_v_t_11
 (19 12) Enable bit of Mux _span_links/cross_mux_horz_1 => sp12_h_r_2 sp4_h_l_0
 (19 13) Enable bit of Mux _span_links/cross_mux_horz_0 => sp12_h_r_0 sp4_h_r_12
+(19 14) Enable bit of Mux _span_links/cross_mux_horz_3 => sp12_h_r_6 sp4_h_r_15
 (19 15) Enable bit of Mux _span_links/cross_mux_horz_2 => sp12_h_r_4 sp4_h_l_3
 (19 2) Enable bit of Mux _span_links/cross_mux_vert_3 => sp12_v_t_4 sp4_v_t_2
 (19 3) Enable bit of Mux _span_links/cross_mux_vert_2 => sp12_v_b_5 sp4_v_b_14
@@ -1031,6 +1050,7 @@
 (19 7) Enable bit of Mux _span_links/cross_mux_vert_6 => sp12_v_b_13 sp4_v_b_18
 (19 8) Enable bit of Mux _span_links/cross_mux_vert_9 => sp12_v_t_16 sp4_v_t_8
 (19 9) Enable bit of Mux _span_links/cross_mux_vert_8 => sp12_v_t_14 sp4_v_b_20
+(2 0) Enable bit of Mux _span_links/cross_mux_horz_4 => sp12_h_r_8 sp4_h_r_16
 (2 10) Enable bit of Mux _span_links/cross_mux_horz_9 => sp12_h_r_18 sp4_h_r_21
 (2 12) Enable bit of Mux _span_links/cross_mux_horz_10 => sp12_h_r_20 sp4_h_r_22
 (2 14) Enable bit of Mux _span_links/cross_mux_horz_11 => sp12_h_l_21 sp4_h_r_23
@@ -2619,6 +2639,8 @@
 (4 10) routing sp4_v_b_6 <X> sp4_v_t_43
 (4 11) routing sp4_h_r_10 <X> sp4_h_l_43
 (4 11) routing sp4_h_r_3 <X> sp4_h_l_43
+(4 11) routing sp4_v_b_1 <X> sp4_h_l_43
+(4 11) routing sp4_v_t_37 <X> sp4_h_l_43
 (4 12) routing sp4_h_l_38 <X> sp4_v_b_9
 (4 12) routing sp4_h_l_44 <X> sp4_v_b_9
 (4 12) routing sp4_v_t_36 <X> sp4_v_b_9
@@ -2630,6 +2652,7 @@
 (4 14) routing sp4_v_b_1 <X> sp4_v_t_44
 (4 14) routing sp4_v_b_9 <X> sp4_v_t_44
 (4 15) routing sp4_h_r_6 <X> sp4_h_l_44
+(4 15) routing sp4_v_b_4 <X> sp4_h_l_44
 (4 15) routing sp4_v_t_38 <X> sp4_h_l_44
 (4 2) routing sp4_h_r_0 <X> sp4_v_t_37
 (4 2) routing sp4_h_r_6 <X> sp4_v_t_37
@@ -2657,6 +2680,7 @@
 (4 8) routing sp4_v_t_43 <X> sp4_v_b_6
 (4 8) routing sp4_v_t_47 <X> sp4_v_b_6
 (4 9) routing sp4_h_l_38 <X> sp4_h_r_6
+(4 9) routing sp4_v_b_0 <X> sp4_h_r_6
 (4 9) routing sp4_v_t_36 <X> sp4_h_r_6
 (42 0) LC_0 Logic Functioning bit
 (42 1) LC_0 Logic Functioning bit
@@ -2738,6 +2762,7 @@
 (48 7) Enable bit of Mux _out_links/OutMux1_3 => wire_mult/mult/O_19 sp4_v_t_11
 (48 8) Enable bit of Mux _out_links/OutMux5_4 => wire_mult/mult/O_20 sp12_h_r_16
 (48 9) Enable bit of Mux _out_links/OutMux0_4 => wire_mult/mult/O_20 sp4_v_b_8
+(5 0) routing sp4_v_b_0 <X> sp4_h_r_0
 (5 0) routing sp4_v_b_6 <X> sp4_h_r_0
 (5 0) routing sp4_v_t_37 <X> sp4_h_r_0
 (5 1) routing sp4_h_l_37 <X> sp4_v_b_0
@@ -2746,17 +2771,21 @@
 (5 1) routing sp4_v_t_44 <X> sp4_v_b_0
 (5 10) routing sp4_h_r_3 <X> sp4_h_l_43
 (5 10) routing sp4_v_b_6 <X> sp4_h_l_43
+(5 10) routing sp4_v_t_37 <X> sp4_h_l_43
+(5 10) routing sp4_v_t_43 <X> sp4_h_l_43
 (5 11) routing sp4_h_l_43 <X> sp4_v_t_43
 (5 11) routing sp4_h_r_0 <X> sp4_v_t_43
 (5 11) routing sp4_h_r_6 <X> sp4_v_t_43
 (5 11) routing sp4_v_b_3 <X> sp4_v_t_43
 (5 12) routing sp4_v_b_3 <X> sp4_h_r_9
+(5 12) routing sp4_v_b_9 <X> sp4_h_r_9
 (5 12) routing sp4_v_t_44 <X> sp4_h_r_9
 (5 13) routing sp4_h_l_38 <X> sp4_v_b_9
 (5 13) routing sp4_h_l_44 <X> sp4_v_b_9
 (5 13) routing sp4_h_r_9 <X> sp4_v_b_9
 (5 13) routing sp4_v_t_43 <X> sp4_v_b_9
 (5 14) routing sp4_h_r_6 <X> sp4_h_l_44
+(5 14) routing sp4_v_b_9 <X> sp4_h_l_44
 (5 14) routing sp4_v_t_38 <X> sp4_h_l_44
 (5 14) routing sp4_v_t_44 <X> sp4_h_l_44
 (5 15) routing sp4_h_l_44 <X> sp4_v_t_44
@@ -2787,6 +2816,7 @@
 (5 7) routing sp4_h_r_9 <X> sp4_v_t_38
 (5 7) routing sp4_v_b_0 <X> sp4_v_t_38
 (5 8) routing sp4_h_l_38 <X> sp4_h_r_6
+(5 8) routing sp4_v_b_0 <X> sp4_h_r_6
 (5 8) routing sp4_v_b_6 <X> sp4_h_r_6
 (5 8) routing sp4_v_t_43 <X> sp4_h_r_6
 (5 9) routing sp4_h_l_37 <X> sp4_v_b_6
@@ -2853,6 +2883,7 @@
 (6 0) routing sp4_h_r_7 <X> sp4_v_b_0
 (6 0) routing sp4_v_t_41 <X> sp4_v_b_0
 (6 0) routing sp4_v_t_44 <X> sp4_v_b_0
+(6 1) routing sp4_v_b_0 <X> sp4_h_r_0
 (6 1) routing sp4_v_b_6 <X> sp4_h_r_0
 (6 10) routing sp4_h_l_36 <X> sp4_v_t_43
 (6 10) routing sp4_h_r_0 <X> sp4_v_t_43
@@ -2860,12 +2891,15 @@
 (6 10) routing sp4_v_b_3 <X> sp4_v_t_43
 (6 11) routing sp4_h_r_10 <X> sp4_h_l_43
 (6 11) routing sp4_h_r_6 <X> sp4_h_l_43
+(6 11) routing sp4_v_t_37 <X> sp4_h_l_43
+(6 11) routing sp4_v_t_43 <X> sp4_h_l_43
 (6 12) routing sp4_h_l_38 <X> sp4_v_b_9
 (6 12) routing sp4_h_r_4 <X> sp4_v_b_9
 (6 12) routing sp4_v_t_36 <X> sp4_v_b_9
 (6 12) routing sp4_v_t_43 <X> sp4_v_b_9
 (6 13) routing sp4_h_l_44 <X> sp4_h_r_9
 (6 13) routing sp4_v_b_3 <X> sp4_h_r_9
+(6 13) routing sp4_v_b_9 <X> sp4_h_r_9
 (6 14) routing sp4_h_l_41 <X> sp4_v_t_44
 (6 14) routing sp4_h_r_3 <X> sp4_v_t_44
 (6 14) routing sp4_v_b_1 <X> sp4_v_t_44
@@ -2897,6 +2931,7 @@
 (6 8) routing sp4_h_r_1 <X> sp4_v_b_6
 (6 8) routing sp4_v_t_38 <X> sp4_v_b_6
 (6 8) routing sp4_v_t_47 <X> sp4_v_b_6
+(6 9) routing sp4_v_b_0 <X> sp4_h_r_6
 (6 9) routing sp4_v_b_6 <X> sp4_h_r_6
 (7 0) MAC16 functional bit: MULT2_bram_cbit_1
 (7 1) MAC16 functional bit: MULT2_bram_cbit_0
@@ -2921,6 +2956,7 @@
 (8 11) routing sp4_v_b_4 <X> sp4_v_t_42
 (8 12) routing sp4_h_l_39 <X> sp4_h_r_10
 (8 12) routing sp4_h_l_47 <X> sp4_h_r_10
+(8 12) routing sp4_v_b_10 <X> sp4_h_r_10
 (8 12) routing sp4_v_b_4 <X> sp4_h_r_10
 (8 13) routing sp4_h_l_41 <X> sp4_v_b_10
 (8 13) routing sp4_h_l_47 <X> sp4_v_b_10
@@ -2935,6 +2971,7 @@
 (8 15) routing sp4_h_r_4 <X> sp4_v_t_47
 (8 15) routing sp4_v_b_7 <X> sp4_v_t_47
 (8 2) routing sp4_v_t_36 <X> sp4_h_l_36
+(8 2) routing sp4_v_t_42 <X> sp4_h_l_36
 (8 3) routing sp4_h_l_36 <X> sp4_v_t_36
 (8 3) routing sp4_h_r_1 <X> sp4_v_t_36
 (8 3) routing sp4_h_r_7 <X> sp4_v_t_36
@@ -2948,6 +2985,7 @@
 (8 5) routing sp4_v_t_36 <X> sp4_v_b_4
 (8 6) routing sp4_h_r_4 <X> sp4_h_l_41
 (8 6) routing sp4_h_r_8 <X> sp4_h_l_41
+(8 6) routing sp4_v_t_41 <X> sp4_h_l_41
 (8 6) routing sp4_v_t_47 <X> sp4_h_l_41
 (8 7) routing sp4_h_l_41 <X> sp4_v_t_41
 (8 7) routing sp4_h_r_10 <X> sp4_v_t_41
@@ -2967,12 +3005,14 @@
 (9 1) routing sp4_v_t_36 <X> sp4_v_b_1
 (9 1) routing sp4_v_t_40 <X> sp4_v_b_1
 (9 10) routing sp4_h_r_4 <X> sp4_h_l_42
+(9 10) routing sp4_v_b_7 <X> sp4_h_l_42
 (9 10) routing sp4_v_t_36 <X> sp4_h_l_42
 (9 10) routing sp4_v_t_42 <X> sp4_h_l_42
 (9 11) routing sp4_h_r_1 <X> sp4_v_t_42
 (9 11) routing sp4_h_r_7 <X> sp4_v_t_42
 (9 11) routing sp4_v_b_11 <X> sp4_v_t_42
 (9 11) routing sp4_v_b_7 <X> sp4_v_t_42
+(9 12) routing sp4_v_b_10 <X> sp4_h_r_10
 (9 12) routing sp4_v_b_4 <X> sp4_h_r_10
 (9 12) routing sp4_v_t_47 <X> sp4_h_r_10
 (9 13) routing sp4_h_l_41 <X> sp4_v_b_10
@@ -2989,6 +3029,7 @@
 (9 2) routing sp4_h_r_10 <X> sp4_h_l_36
 (9 2) routing sp4_v_b_1 <X> sp4_h_l_36
 (9 2) routing sp4_v_t_36 <X> sp4_h_l_36
+(9 2) routing sp4_v_t_42 <X> sp4_h_l_36
 (9 3) routing sp4_h_r_1 <X> sp4_v_t_36
 (9 3) routing sp4_h_r_7 <X> sp4_v_t_36
 (9 3) routing sp4_v_b_1 <X> sp4_v_t_36
@@ -3001,6 +3042,7 @@
 (9 5) routing sp4_v_t_41 <X> sp4_v_b_4
 (9 5) routing sp4_v_t_45 <X> sp4_v_b_4
 (9 6) routing sp4_v_b_4 <X> sp4_h_l_41
+(9 6) routing sp4_v_t_41 <X> sp4_h_l_41
 (9 6) routing sp4_v_t_47 <X> sp4_h_l_41
 (9 7) routing sp4_h_r_10 <X> sp4_v_t_41
 (9 7) routing sp4_h_r_4 <X> sp4_v_t_41

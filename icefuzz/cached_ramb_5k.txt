@@ -164,6 +164,7 @@
 (11 2) routing sp4_v_b_11 <X> sp4_v_t_39
 (11 2) routing sp4_v_b_6 <X> sp4_v_t_39
 (11 3) routing sp4_h_r_2 <X> sp4_h_l_39
+(11 3) routing sp4_h_r_6 <X> sp4_h_l_39
 (11 3) routing sp4_v_t_39 <X> sp4_h_l_39
 (11 3) routing sp4_v_t_45 <X> sp4_h_l_39
 (11 4) routing sp4_h_l_46 <X> sp4_v_b_5
@@ -291,6 +292,7 @@
 (13 2) routing sp4_v_b_2 <X> sp4_v_t_39
 (13 2) routing sp4_v_b_6 <X> sp4_v_t_39
 (13 3) routing sp4_h_r_11 <X> sp4_h_l_39
+(13 3) routing sp4_h_r_6 <X> sp4_h_l_39
 (13 3) routing sp4_v_b_9 <X> sp4_h_l_39
 (13 3) routing sp4_v_t_45 <X> sp4_h_l_39
 (13 4) routing sp4_h_l_40 <X> sp4_v_b_5
