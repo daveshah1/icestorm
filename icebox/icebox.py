@@ -31,6 +31,8 @@ class iceconfig:
         self.io_tiles = dict()
         self.ramb_tiles = dict()
         self.ramt_tiles = dict()
+        self.dsp_tiles = [dict() for i in range(4)]
+        self.ipcon_tiles = dict()
         self.ram_data = dict()
         self.extra_bits = set()
         self.symbols = dict()
@@ -96,7 +98,18 @@ class iceconfig:
         for x in range(1, self.max_x):
             self.io_tiles[(x, 0)] = ["0" * 18 for i in range(16)]
             self.io_tiles[(x, self.max_y)] = ["0" * 18 for i in range(16)]
-
+        for x in [0, self.max_x]:
+            for y in range(1, self.max_y):
+                if y in [5, 10, 15, 23]:
+                    self.dsp_tiles[0][(x, y)] = ["0" * 54 for i in range(16)]
+                elif y in [6, 11, 16, 24]:
+                    self.dsp_tiles[1][(x, y)] = ["0" * 54 for i in range(16)]
+                elif y in [7, 12, 17, 25]:
+                    self.dsp_tiles[2][(x, y)] = ["0" * 54 for i in range(16)]
+                elif y in [8, 13, 18, 26]:
+                    self.dsp_tiles[3][(x, y)] = ["0" * 54 for i in range(16)]
+                else:
+                    self.ipcon_tiles[(x, y)] = ["0" * 54 for i in range(16)]
     def setup_empty_8k(self):
         self.clear()
         self.device = "8k"
@@ -132,6 +145,9 @@ class iceconfig:
         if (x, y) in self.logic_tiles: return self.logic_tiles[(x, y)]
         if (x, y) in self.ramb_tiles: return self.ramb_tiles[(x, y)]
         if (x, y) in self.ramt_tiles: return self.ramt_tiles[(x, y)]
+        for i in range(4):
+            if (x, y) in self.dsp_tiles[i]: return self.dsp_tiles[i][(x, y)]
+        if (x, y) in self.ipcon_tiles: return self.ipcon_tiles[(x, y)]            
         return None
 
     def pinloc_db(self):
@@ -242,6 +258,12 @@ class iceconfig:
             if (x, y) in self.logic_tiles: return logictile_5k_db
             if (x, y) in self.ramb_tiles: return rambtile_5k_db
             if (x, y) in self.ramt_tiles: return ramttile_5k_db
+            if (x, y) in self.ipcon_tiles: return ipcon_5k_db
+            if (x, y) in self.dsp_tiles[0]: return dsp0_5k_db
+            if (x, y) in self.dsp_tiles[1]: return dsp1_5k_db
+            if (x, y) in self.dsp_tiles[2]: return dsp2_5k_db
+            if (x, y) in self.dsp_tiles[3]: return dsp3_5k_db
+
         elif self.device == "8k":
             if (x, y) in self.logic_tiles: return logictile_8k_db
             if (x, y) in self.ramb_tiles: return rambtile_8k_db
@@ -253,13 +275,24 @@ class iceconfig:
         assert False
 
     def tile_type(self, x, y):
-        if x == 0: return "IO"
+        if x == 0 and self.device != "5k": return "IO"
         if y == 0: return "IO"
-        if x == self.max_x: return "IO"
+        if x == self.max_x and self.device != "5k": return "IO"
         if y == self.max_y: return "IO"
         if (x, y) in self.ramb_tiles: return "RAMB"
         if (x, y) in self.ramt_tiles: return "RAMT"
         if (x, y) in self.logic_tiles: return "LOGIC"
+        if (x == 0 or x == self.max_x) and self.device == "5k":
+            if y in [5, 10, 15, 23]:
+                return "DSP0"
+            elif y in [6, 11, 16, 24]:
+                return "DSP1"
+            elif y in [7, 12, 17, 25]:
+                return "DSP2"
+            elif y in [8, 13, 18, 26]:
+                return "DSP3"
+            else:
+                return "IPCON"
         assert False
 
     def tile_pos(self, x, y):
@@ -340,6 +373,9 @@ class iceconfig:
             if npos == "x":
                 if (nx, ny) in self.logic_tiles:
                     return (nx, ny, "lutff_%d/out" % func)
+                for i in range(4):
+                    if (nx, ny) in self.dsp_tiles[i]: #TODO: check this
+                        return (nx, ny, "mult/O_%d" % (i * 8 + func))
                 if (nx, ny) in self.ramb_tiles:
                     if self.device == "1k":
                         return (nx, ny, "ram/RDATA_%d" % func)
@@ -566,7 +602,22 @@ class iceconfig:
                 add_seed_segments(idx, tile, ramttile_8k_db)
             else:
                 assert False
-
+        
+        for idx, tile in self.dsp_tiles[0].items():
+            if self.device == "5k":
+                add_seed_segments(idx, tile, dsp0_5k_db)
+        for idx, tile in self.dsp_tiles[1].items():
+            if self.device == "5k":
+                add_seed_segments(idx, tile, dsp1_5k_db)        
+        for idx, tile in self.dsp_tiles[2].items():
+            if self.device == "5k":
+                add_seed_segments(idx, tile, dsp2_5k_db)    
+        for idx, tile in self.dsp_tiles[3].items():
+            if self.device == "5k":
+                add_seed_segments(idx, tile, dsp3_5k_db)    
+        for idx, tile in self.ipcon_tiles.items():
+            if self.device == "5k":
+                add_seed_segments(idx, tile, ipcon_5k_db)                            
         for padin, pio in enumerate(self.padin_pio_db()):
             s1 = (pio[0], pio[1], "padin_%d" % pio[2])
             s2 = (pio[0], pio[1], "glb_netwk_%d" % padin)
@@ -661,7 +712,7 @@ class iceconfig:
                     expected_data_lines -= 1
                     continue
                 assert expected_data_lines <= 0
-                if line[0] in (".io_tile", ".logic_tile", ".ramb_tile", ".ramt_tile", ".ram_data", ".ipconn_tile", ".dsp1_tile", ".dsp2_tile", ".dsp3_tile", ".dsp4_tile"):
+                if line[0] in (".io_tile", ".logic_tile", ".ramb_tile", ".ramt_tile", ".ram_data", ".ipcon_tile", ".dsp0_tile", ".dsp1_tile", ".dsp2_tile", ".dsp3_tile"):
                     current_data = list()
                     expected_data_lines = 16
                     self.max_x = max(self.max_x, int(line[1]))
@@ -677,6 +728,13 @@ class iceconfig:
                     continue
                 if line[0] == ".ramt_tile":
                     self.ramt_tiles[(int(line[1]), int(line[2]))] = current_data
+                    continue
+                if line[0] == ".ipcon_tile":
+                    self.ipcon_tiles[(int(line[1]), int(line[2]))] = current_data
+                    continue
+                match = re.match(r".dsp(\d)_tile", line[0])
+                if match:
+                    self.dsp_tiles[int(match.group(1))][(int(line[1]), int(line[2]))] = current_data
                     continue
                 if line[0] == ".ram_data":
                     self.ram_data[(int(line[1]), int(line[2]))] = current_data
@@ -862,6 +920,8 @@ def netname_normalize(netname, edge="", ramb=False, ramt=False, ramb_8k=False, r
     netname = netname.replace("lc_", "lutff_")
     netname = netname.replace("wire_logic_cluster/", "")
     netname = netname.replace("wire_io_cluster/", "")
+    netname = netname.replace("wire_mult/", "")
+    netname = netname.replace("wire_con_box/", "")
     netname = netname.replace("wire_bram/", "")
     if (ramb or ramt or ramb_8k or ramt_8k) and netname.startswith("input"):
         match = re.match(r"input(\d)_(\d)", netname)
@@ -4179,6 +4239,13 @@ ramttile_5k_db = parse_db(iceboxdb.database_ramt_5k_txt, "5k")
 rambtile_8k_db = parse_db(iceboxdb.database_ramb_8k_txt, "8k")
 ramttile_8k_db = parse_db(iceboxdb.database_ramt_8k_txt, "8k")
 
+ipcon_5k_db = parse_db(iceboxdb.database_ipcon_5k_txt, "5k")
+dsp0_5k_db = parse_db(iceboxdb.database_dsp0_5k_txt, "5k")
+dsp1_5k_db = parse_db(iceboxdb.database_dsp1_5k_txt, "5k")
+dsp2_5k_db = parse_db(iceboxdb.database_dsp2_5k_txt, "5k")
+dsp3_5k_db = parse_db(iceboxdb.database_dsp3_5k_txt, "5k")
+
+
 iotile_l_db = list()
 iotile_r_db = list()
 iotile_t_db = list()
@@ -4232,7 +4299,7 @@ iotile_b_5k_db.append([["B15[14]"], "IoCtrl", "padeb_test_0"])
 iotile_b_5k_db.append([["B6[15]"], "IoCtrl", "cf_bit_35"])
 iotile_b_5k_db.append([["B12[15]"], "IoCtrl", "cf_bit_39"])
 
-for db in [iotile_l_db, iotile_r_db, iotile_t_db, iotile_b_db, iotile_t_5k_db, iotile_b_5k_db, logictile_db, logictile_5k_db, logictile_8k_db, logictile_384_db, rambtile_db, ramttile_db, rambtile_5k_db, ramttile_5k_db, rambtile_8k_db, ramttile_8k_db]:
+for db in [iotile_l_db, iotile_r_db, iotile_t_db, iotile_b_db, iotile_t_5k_db, iotile_b_5k_db, logictile_db, logictile_5k_db, logictile_8k_db, logictile_384_db, rambtile_db, ramttile_db, rambtile_5k_db, ramttile_5k_db, rambtile_8k_db, ramttile_8k_db, dsp0_5k_db, dsp1_5k_db, dsp2_5k_db, dsp3_5k_db, ipcon_5k_db]:
     for entry in db:
         if entry[1] in ("buffer", "routing"):
             entry[2] = netname_normalize(entry[2],
