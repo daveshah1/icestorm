@@ -500,7 +500,9 @@ class iceconfig:
                         horz_net = n.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_")
                         
                         if self.device == "5k":
-                            vert_net = vert_net.replace("span4", "sp4").replace("vert", "v")
+                            m = re.match("span4_vert_([lrtb])_(\d+)$", vert_net)
+                            assert m
+                            vert_net = "sp4_v_%s_%d" % (m.group(1), 32 - int(m.group(2)))
                         
                         if s[0] == 0 and s[1] == 0:
                             if direction == "l": s = (0, 1, vert_net)
@@ -514,8 +516,10 @@ class iceconfig:
                         horz_net = netname.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_")
 
                         if self.device == "5k":
-                            vert_net = vert_net.replace("span4", "sp4").replace("vert", "v")
-
+                            m = re.match("span4_vert_([lrtb])_(\d+)$", vert_net)
+                            assert m
+                            vert_net = "sp4_v_%s_%d" % (m.group(1), 32 - int(m.group(2)))
+                            
                         if s[0] == 0 and s[1] == self.max_y:
                             if direction == "l": s = (0, self.max_y-1, vert_net)
                             if direction == "t": s = (1, self.max_y, horz_net)
