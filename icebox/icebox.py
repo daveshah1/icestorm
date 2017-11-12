@@ -344,6 +344,12 @@ class iceconfig:
         if y == 1 and x not in (0, self.max_x) and direction == 'b': return pos_follow_net("x", "B", netname, self.device)
         if x == self.max_x-1 and y not in (0, self.max_y) and direction == 'r': return pos_follow_net("x", "R", netname, self.device)
         if y == self.max_y-1 and x not in (0, self.max_x) and direction == 't': return pos_follow_net("x", "T", netname, self.device)
+        if self.device == "5k":
+            if y == 1 and x in (0, self.max_x) and direction == 'b': return pos_follow_net(self.tile_pos(x, y), "B", netname, self.device)
+            if y == self.max_y-1 and x in (0, self.max_x) and direction == 't': return pos_follow_net(self.tile_pos(x, y), "T", netname, self.device)
+            if x == 1 and y in (0, self.max_y) and direction == 'l': return pos_follow_net(self.tile_pos(x, y), "L", netname, self.device)
+            if x == self.max_x-1 and y in (0, self.max_y) and direction == 'r': return pos_follow_net(self.tile_pos(x, y), "R", netname, self.device)
+
         return pos_follow_net(self.tile_pos(x, y), direction, netname, self.device)
 
     def follow_funcnet(self, x, y, func):
@@ -502,8 +508,12 @@ class iceconfig:
                         if self.device == "5k":
                             m = re.match("span4_vert_([lrtb])_(\d+)$", vert_net)
                             assert m
-                            vert_net = "sp4_v_%s_%d" % (m.group(1), 32 - int(m.group(2)))
-                        
+                            vert_net = "sp4_v_%s_%d" % (m.group(1), int(m.group(2)) + 28)
+
+                            m = re.match("span4_horz_([lrtb])_(\d+)$", horz_net)
+                            assert m
+                            horz_net = "span4_horz_%s_%d" % (m.group(1), int(m.group(2)) - 28)
+                            
                         if s[0] == 0 and s[1] == 0:
                             if direction == "l": s = (0, 1, vert_net)
                             if direction == "b": s = (1, 0, horz_net)
@@ -512,13 +522,17 @@ class iceconfig:
                             if direction == "r": s = (self.max_x, self.max_y-1, vert_net)
                             if direction == "t": s = (self.max_x-1, self.max_y, horz_net)
 
-                        vert_net = netname.replace("_l_", "_t_").replace("_r_", "_b_").replace("_horz_", "_vert_")
-                        horz_net = netname.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_")
+                        vert_net = netname.replace("_l_", "_t_").replace("_r_", "_b_").replace("_horz_", "_vert_").replace("_h_", "_v_")
+                        horz_net = netname.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_").replace("_v_", "_h_")
 
                         if self.device == "5k":
-                            m = re.match("span4_vert_([lrtb])_(\d+)$", vert_net)
+                            m = re.match("(span4_vert|sp4_v)_([lrtb])_(\d+)$", vert_net)
                             assert m
-                            vert_net = "sp4_v_%s_%d" % (m.group(1), 32 - int(m.group(2)))
+                            vert_net = "sp4_v_%s_%d" % (m.group(2), int(m.group(3)) + 28)
+                            
+                            m = re.match("(span4_horz|sp4_h)_([lrtb])_(\d+)$", horz_net)
+                            assert m
+                            horz_net = "span4_horz_%s_%d" % (m.group(2), int(m.group(3)) - 28)
                             
                         if s[0] == 0 and s[1] == self.max_y:
                             if direction == "l": s = (0, self.max_y-1, vert_net)
@@ -987,6 +1001,8 @@ def pos_follow_net(pos, direction, netname, device):
 
             m = re.match("sp4_v_[tb]_(\d+)$", netname)
             if m and direction in ("t", "T"):
+                if device == "5k" and direction == "T" and pos in ("l", "r"):
+                    return re.sub("sp4_v_", "span4_vert_", netname)
                 n = sp4v_normalize(netname, "t")
                 if n is not None:
                     if direction == "t":
@@ -997,6 +1013,8 @@ def pos_follow_net(pos, direction, netname, device):
                         n = re.sub("sp4_v_", "span4_vert_", n)
                     return n
             if m and direction in ("b", "B"):
+                if device == "5k" and direction == "B" and pos in ("l", "r"):
+                    return re.sub("sp4_v_", "span4_vert_", netname)
                 n = sp4v_normalize(netname, "b")
                 if n is not None:
                     if direction == "b":
@@ -1068,6 +1086,8 @@ def pos_follow_net(pos, direction, netname, device):
         m = re.match("span4_horz_([rl])_(\d+)$", netname)
         if m:
             case, idx = direction + m.group(1), int(m.group(2))
+            if direction == "L" or direction == "R":
+                return netname
             if case == "ll":
                 return "span4_horz_r_%d" % idx
             if case == "lr" and idx >= 4:
