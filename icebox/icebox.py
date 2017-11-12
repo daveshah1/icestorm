@@ -340,11 +340,11 @@ class iceconfig:
         return pos_has_net(self.tile_pos(x, y), netname)
 
     def tile_follow_net(self, x, y, direction, netname):
-        if x == 1 and y not in (0, self.max_y) and direction == 'l': return pos_follow_net("x", "L", netname)
-        if y == 1 and x not in (0, self.max_x) and direction == 'b': return pos_follow_net("x", "B", netname)
-        if x == self.max_x-1 and y not in (0, self.max_y) and direction == 'r': return pos_follow_net("x", "R", netname)
-        if y == self.max_y-1 and x not in (0, self.max_x) and direction == 't': return pos_follow_net("x", "T", netname)
-        return pos_follow_net(self.tile_pos(x, y), direction, netname)
+        if x == 1 and y not in (0, self.max_y) and direction == 'l': return pos_follow_net("x", "L", netname, self.device)
+        if y == 1 and x not in (0, self.max_x) and direction == 'b': return pos_follow_net("x", "B", netname, self.device)
+        if x == self.max_x-1 and y not in (0, self.max_y) and direction == 'r': return pos_follow_net("x", "R", netname, self.device)
+        if y == self.max_y-1 and x not in (0, self.max_x) and direction == 't': return pos_follow_net("x", "T", netname, self.device)
+        return pos_follow_net(self.tile_pos(x, y), direction, netname, self.device)
 
     def follow_funcnet(self, x, y, func):
         neighbours = set()
@@ -459,12 +459,12 @@ class iceconfig:
                         neighbours.add((nx, ny, netname))
 
         match = re.match(r"sp4_r_v_b_(\d+)", netname)
-        if match and 0 < x < self.max_x-1:
+        if match and ((0 < x < self.max_x-1) or (self.device == "5k")):
             neighbours.add((x+1, y, sp4v_normalize("sp4_v_b_" + match.group(1))))
         #print('\tafter r_v_b', neighbours)
 
         match = re.match(r"sp4_v_[bt]_(\d+)", netname)
-        if match and 1 < x < self.max_x:
+        if match and (1 < x < self.max_x or ((self.device == "5k") and (x > 0))):
             n = sp4v_normalize(netname, "b")
             if n is not None:
                 n = n.replace("sp4_", "sp4_r_")
@@ -495,9 +495,13 @@ class iceconfig:
 
                 if s[0] in (0, self.max_x) and s[1] in (0, self.max_y):
                     if re.match("span4_(vert|horz)_[lrtb]_\d+$", n):
+                        
                         vert_net = n.replace("_l_", "_t_").replace("_r_", "_b_").replace("_horz_", "_vert_")
                         horz_net = n.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_")
-
+                        
+                        if self.device == "5k":
+                            vert_net = vert_net.replace("span4", "sp4").replace("vert", "v")
+                        
                         if s[0] == 0 and s[1] == 0:
                             if direction == "l": s = (0, 1, vert_net)
                             if direction == "b": s = (1, 0, horz_net)
@@ -508,6 +512,9 @@ class iceconfig:
 
                         vert_net = netname.replace("_l_", "_t_").replace("_r_", "_b_").replace("_horz_", "_vert_")
                         horz_net = netname.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_")
+
+                        if self.device == "5k":
+                            vert_net = vert_net.replace("span4", "sp4").replace("vert", "v")
 
                         if s[0] == 0 and s[1] == self.max_y:
                             if direction == "l": s = (0, self.max_y-1, vert_net)
@@ -950,13 +957,13 @@ def pos_has_net(pos, netname):
         if re.search(r"_vert_[bt]_\d+$", netname): return False
     return True
 
-def pos_follow_net(pos, direction, netname):
-    if pos == "x":
+def pos_follow_net(pos, direction, netname, device):
+    if pos == "x" or ((pos in ("l", "r")) and (device == "5k")):
             m = re.match("sp4_h_[lr]_(\d+)$", netname)
             if m and direction in ("l", "L"):
                 n = sp4h_normalize(netname, "l")
                 if n is not None:
-                    if direction == "l":
+                    if direction == "l" or device == "5k":
                         n = re.sub("_l_", "_r_", n)
                         n = sp4h_normalize(n)
                     else:
@@ -966,7 +973,7 @@ def pos_follow_net(pos, direction, netname):
             if m and direction in ("r", "R"):
                 n = sp4h_normalize(netname, "r")
                 if n is not None:
-                    if direction == "r":
+                    if direction == "r" or device == "5k":
                         n = re.sub("_r_", "_l_", n)
                         n = sp4h_normalize(n)
                     else:
@@ -1000,7 +1007,7 @@ def pos_follow_net(pos, direction, netname):
             if m and direction in ("l", "L"):
                 n = sp12h_normalize(netname, "l")
                 if n is not None:
-                    if direction == "l":
+                    if direction == "l" or device == "5k":
                         n = re.sub("_l_", "_r_", n)
                         n = sp12h_normalize(n)
                     else:
@@ -1010,7 +1017,7 @@ def pos_follow_net(pos, direction, netname):
             if m and direction in ("r", "R"):
                 n = sp12h_normalize(netname, "r")
                 if n is not None:
-                    if direction == "r":
+                    if direction == "r" or device == "5k":
                         n = re.sub("_r_", "_l_", n)
                         n = sp12h_normalize(n)
                     else:
@@ -1040,7 +1047,7 @@ def pos_follow_net(pos, direction, netname):
                         n = re.sub("sp12_v_", "span12_vert_", n)
                     return n
 
-    if pos in ("l", "r" ):
+    if (pos in ("l", "r" )) and (device != "5k"):
         m = re.match("span4_vert_([bt])_(\d+)$", netname)
         if m:
             case, idx = direction + m.group(1), int(m.group(2))

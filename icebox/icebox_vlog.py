@@ -317,7 +317,7 @@ for segs in sorted(ic.group_segments(extra_connections=extra_connections, extra_
         match =  re.match("lutff_(\d+)/", s[2])
         if match:
             #IpCon and DSP tiles look like logic tiles, but aren't.
-            if ic.device == "5k" and (s[0] == 0 or s[0] == self.max_x):
+            if ic.device == "5k" and (s[0] == 0 or s[0] == ic.max_x):
                 special_5k_queue.add((s[0], s[1]))
             else:
                 luts_queue.add((s[0], s[1], int(match.group(1))))
