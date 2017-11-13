@@ -313,25 +313,25 @@ class iceconfig:
             if netname.startswith("logic_op_bot_"):
                 if y == self.max_y and 0 < x < self.max_x: return True
             if netname.startswith("logic_op_bnl_"):
-                if x == self.max_x and 1 < y < self.max_y: return True
+                if x == self.max_x and 1 < y < self.max_y and (self.device != "5k"): return True
                 if y == self.max_y and 1 < x < self.max_x: return True
             if netname.startswith("logic_op_bnr_"):
-                if x == 0 and 1 < y < self.max_y: return True
+                if x == 0 and 1 < y < self.max_y and (self.device != "5k"): return True
                 if y == self.max_y and 0 < x < self.max_x-1: return True
 
             if netname.startswith("logic_op_top_"):
                 if y == 0 and 0 < x < self.max_x: return True
             if netname.startswith("logic_op_tnl_"):
-                if x == self.max_x and 0 < y < self.max_y-1: return True
+                if x == self.max_x and 0 < y < self.max_y-1 and (self.device != "5k"): return True
                 if y == 0 and 1 < x < self.max_x: return True
             if netname.startswith("logic_op_tnr_"):
-                if x == 0 and 0 < y < self.max_y-1: return True
+                if x == 0 and 0 < y < self.max_y-1 and (self.device != "5k"): return True
                 if y == 0 and 0 < x < self.max_x-1: return True
 
             if netname.startswith("logic_op_lft_"):
-                if x == self.max_x: return True
+                if x == self.max_x and (self.device != "5k"): return True
             if netname.startswith("logic_op_rgt_"):
-                if x == 0: return True
+                if x == 0 and (self.device != "5k"): return True
 
             return False
 
@@ -355,7 +355,7 @@ class iceconfig:
     def follow_funcnet(self, x, y, func):
         neighbours = set()
         def do_direction(name, nx, ny):
-            if 0 < nx < self.max_x and 0 < ny < self.max_y:
+            if (0 < nx < self.max_x or self.device == "5k") and 0 < ny < self.max_y:
                 neighbours.add((nx, ny, "neigh_op_%s_%d" % (name, func)))
             if nx in (0, self.max_x) and 0 < ny < self.max_y and nx != x:
                 neighbours.add((nx, ny, "logic_op_%s_%d" % (name, func)))
@@ -517,7 +517,7 @@ class iceconfig:
                         if s[0] == 0 and s[1] == 0:
                             if direction == "l": s = (0, 1, vert_net)
                             if direction == "b": s = (1, 0, horz_net)
-
+                            
                         if s[0] == self.max_x and s[1] == self.max_y:
                             if direction == "r": s = (self.max_x, self.max_y-1, vert_net)
                             if direction == "t": s = (self.max_x-1, self.max_y, horz_net)
@@ -525,7 +525,7 @@ class iceconfig:
                         vert_net = netname.replace("_l_", "_t_").replace("_r_", "_b_").replace("_horz_", "_vert_").replace("_h_", "_v_")
                         horz_net = netname.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_").replace("_v_", "_h_")
 
-                        if self.device == "5k":
+                        if self.device == "5k":    
                             m = re.match("(span4_vert|sp4_v)_([lrtb])_(\d+)$", vert_net)
                             assert m
                             vert_net = "sp4_v_%s_%d" % (m.group(2), int(m.group(3)) + 28)
@@ -537,11 +537,11 @@ class iceconfig:
                         if s[0] == 0 and s[1] == self.max_y:
                             if direction == "l": s = (0, self.max_y-1, vert_net)
                             if direction == "t": s = (1, self.max_y, horz_net)
-
+                            
                         if s[0] == self.max_x and s[1] == 0:
                             if direction == "r": s = (self.max_x, 1, vert_net)
                             if direction == "b": s = (self.max_x-1, 0, horz_net)
-
+                            
                 if self.tile_has_net(s[0], s[1], s[2]):
                     neighbours.add((s[0], s[1], s[2]))
 
@@ -1097,13 +1097,13 @@ def pos_follow_net(pos, direction, netname, device):
             if case == "rr" and idx >= 12:
                 return "span4_horz_l_%d" % idx
 
-    if pos == "l" and direction == "r":
+    if pos == "l" and direction == "r" and (device != "5k"):
             m = re.match("span4_horz_(\d+)$", netname)
             if m: return sp4h_normalize("sp4_h_l_%s" % m.group(1))
             m = re.match("span12_horz_(\d+)$", netname)
             if m: return sp12h_normalize("sp12_h_l_%s" % m.group(1))
 
-    if pos == "r" and direction == "l":
+    if pos == "r" and direction == "l" and (device != "5k"):
             m = re.match("span4_horz_(\d+)$", netname)
             if m: return sp4h_normalize("sp4_h_r_%s" % m.group(1))
             m = re.match("span12_horz_(\d+)$", netname)
