@@ -104,9 +104,14 @@ A work-in-progress effort to determine where signals and configuration bits are 
   
 <p>
 <strong>Configuration Bits</strong><br/>
-TODO
-</p>
-
+<p>The DSP configuration bits mostly follow the order stated in the ICE Technology Library document, where they are described as<span style="font-family:monospace">CBIT[24:0]</span>. For most DSP tiles,
+	these follow a logical order where <span style="font-family:monospace">CBIT[7:0]</span> maps to DSP0 <span style="font-family:monospace">CBIT[7:0]</span>; <span style="font-family:monospace">CBIT[15:8]</span>
+	 to DSP1 <span style="font-family:monospace">CBIT[7:0]</span>, <span style="font-family:monospace">CBIT[23:16]</span> to DSP2 <span style="font-family:monospace">CBIT[7:0]</span>
+	  and <span style="font-family:monospace">CBIT[24]</span> to DSP3 <span style="font-family:monospace">CBIT0</span>.
+		</p>
+<p>However, there are some locations where configuration bits are swapped between DSP tiles and IPConnect tiles. For example, DSP1 (0, 16) <span style="font-family:monospace">CBIT[4:3]</span> is used
+	for the internal oscillator, and the DSP configuration bits are then located in IPConnect tile (0, 19) <span style="font-family:monospace">CBIT[6:5]</span>.</p>
+<p>The exact permutations are not yet known, but a script will be developed to find them.</p>
 <p>
 <strong>Other Implementation Notes</strong><br/>
 <p>
@@ -120,7 +125,8 @@ TODO
 </p>
 <h2>IPConnect Tiles</h2>
 <p>IPConnect tiles are used for connections to all of the other UltraPlus features, such as I2C/SPI, SPRAM, RGB and oscillators. Like DSP tiles,
-they are structually similar to logic tiles. The outputs of IO functions are connected to nets named  <span style="font-family:monospace">slf_op_0</span> through <span style="font-family:monospace">slf_op_7</span>.</p>
+they are structually similar to logic tiles. The outputs of IP functions are connected to nets named  <span style="font-family:monospace">slf_op_0</span> through <span style="font-family:monospace">slf_op_7</span>,
+and the inputs use the LUT/FF inputs in the same way as DSP tiles.</p>
 
 
 
