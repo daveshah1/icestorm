@@ -457,17 +457,19 @@ class iceconfig:
                 h_idx = idx - 28
         elif corner == "tl":
             #TODO: bounds check for v_idx case?
-            v_idx = (idx + 6) ^ 1
-            if idx >= 6 and idx < 18:
-                h_idx = (idx ^ 1) - 6
+            v_idx = (idx + 8) ^ 1
+            if idx >= 8 and idx < 32:
+                h_idx = (idx ^ 1) - 8
         elif corner == "tr":
             #TODO: bounds check for v_idx case?
-            v_idx = (idx + 12) ^ 1
-            if idx >= 12 and idx < 24:
+            if idx <= 24:
+                v_idx = (idx + 12) ^ 1
+            if idx >= 12 and idx < 36:
                 h_idx = (idx ^ 1) - 12            
         elif corner == "br":
             #TODO: bounds check for v_idx case?
-            v_idx = idx + 32
+            if idx <= 16:
+                v_idx = idx + 32
             if idx >= 32 and idx < 48: #check
                 h_idx = idx - 32
         return (h_idx, v_idx)
@@ -544,7 +546,9 @@ class iceconfig:
 
                 if s[0] in (0, self.max_x) and s[1] in (0, self.max_y):
                     if re.match("span4_(vert|horz)_[lrtb]_\d+$", n):
-                        
+                        m = re.match("span4_(vert|horz)_([lrtb])_\d+$", n)
+                        if self.device == "5k" and (m.group(2) == "l" or m.group(2) == "t"):
+                            continue
                         vert_net = n.replace("_l_", "_t_").replace("_r_", "_b_").replace("_horz_", "_vert_")
                         horz_net = n.replace("_t_", "_l_").replace("_b_", "_r_").replace("_vert_", "_horz_")
                         
