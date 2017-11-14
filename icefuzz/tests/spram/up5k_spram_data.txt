@@ -39,9 +39,9 @@ SPRAM 0 0 1
 	DATAOUT[13]: (0, 2, slf_op_5)
 	DATAOUT[14]: (0, 2, slf_op_6)
 	DATAOUT[15]: (0, 2, slf_op_7)
-	DATAOUT[1]: 
+	DATAOUT[1]: (0, 1, slf_op_1)
 	DATAOUT[2]: (0, 1, slf_op_2)
-	DATAOUT[3]: 
+	DATAOUT[3]: (0, 1, slf_op_3)
 	DATAOUT[4]: (0, 1, slf_op_4)
 	DATAOUT[5]: (0, 1, slf_op_5)
 	DATAOUT[6]: (0, 1, slf_op_6)
@@ -96,10 +96,10 @@ SPRAM 0 0 2
 	DATAOUT[12]: (0, 4, slf_op_4)
 	DATAOUT[13]: (0, 4, slf_op_5)
 	DATAOUT[14]: (0, 4, slf_op_6)
-	DATAOUT[15]: 
+	DATAOUT[15]: (0, 4, slf_op_7)
 	DATAOUT[1]: (0, 3, slf_op_1)
 	DATAOUT[2]: (0, 3, slf_op_2)
-	DATAOUT[3]: 
+	DATAOUT[3]: (0, 3, slf_op_3)
 	DATAOUT[4]: (0, 3, slf_op_4)
 	DATAOUT[5]: (0, 3, slf_op_5)
 	DATAOUT[6]: (0, 3, slf_op_6)
@@ -117,8 +117,8 @@ SPRAM 0 0 2
 SPRAM 25 0 3
 	ADDRESS[0]: (25, 2, lutff_0/in_1)
 	ADDRESS[10]: (25, 2, lutff_2/in_0)
-	ADDRESS[11]: (25, 3, lutff_4/in_1)
-	ADDRESS[12]: (25, 4, lutff_2/in_3)
+	ADDRESS[11]: (25, 2, lutff_3/in_0)
+	ADDRESS[12]: (25, 2, lutff_4/in_0)
 	ADDRESS[13]: (25, 2, lutff_5/in_0)
 	ADDRESS[1]: (25, 2, lutff_1/in_1)
 	ADDRESS[2]: (25, 2, lutff_2/in_1)
@@ -126,7 +126,7 @@ SPRAM 25 0 3
 	ADDRESS[4]: (25, 2, lutff_4/in_1)
 	ADDRESS[5]: (25, 2, lutff_5/in_1)
 	ADDRESS[6]: (25, 2, lutff_6/in_1)
-	ADDRESS[7]: (25, 2, lutff_7/in_1) (25, 2, lutff_3/in_0)
+	ADDRESS[7]: (25, 2, lutff_7/in_1)
 	ADDRESS[8]: (25, 2, lutff_0/in_0)
 	ADDRESS[9]: (25, 2, lutff_1/in_0)
 	CHIPSELECT: (25, 3, lutff_6/in_1)
@@ -136,9 +136,9 @@ SPRAM 25 0 3
 	DATAIN[10]: (25, 1, lutff_2/in_1)
 	DATAIN[11]: (25, 1, lutff_3/in_1)
 	DATAIN[12]: (25, 1, lutff_4/in_1)
-	DATAIN[13]: (25, 1, lutff_6/in_1)
-	DATAIN[14]: 
-	DATAIN[15]: (25, 1, lutff_5/in_1)
+	DATAIN[13]: (25, 1, lutff_5/in_1)
+	DATAIN[14]: (25, 1, lutff_6/in_1)
+	DATAIN[15]: (25, 1, lutff_7/in_1)
 	DATAIN[1]: (25, 1, lutff_1/in_3)
 	DATAIN[2]: (25, 1, lutff_2/in_3)
 	DATAIN[3]: (25, 1, lutff_3/in_3)
@@ -149,34 +149,34 @@ SPRAM 25 0 3
 	DATAIN[8]: (25, 1, lutff_0/in_1)
 	DATAIN[9]: (25, 1, lutff_1/in_1)
 	DATAOUT[0]: (25, 1, slf_op_0)
-	DATAOUT[10]: 
-	DATAOUT[11]: 
-	DATAOUT[12]: 
-	DATAOUT[13]: 
-	DATAOUT[14]: (25, 2, slf_op_4)
-	DATAOUT[15]: (25, 2, slf_op_5)
+	DATAOUT[10]: (25, 2, slf_op_2)
+	DATAOUT[11]: (25, 2, slf_op_3)
+	DATAOUT[12]: (25, 2, slf_op_4)
+	DATAOUT[13]: (25, 2, slf_op_5)
+	DATAOUT[14]: (25, 2, slf_op_6)
+	DATAOUT[15]: (25, 2, slf_op_7)
 	DATAOUT[1]: (25, 1, slf_op_1)
 	DATAOUT[2]: (25, 1, slf_op_2)
 	DATAOUT[3]: (25, 1, slf_op_3)
 	DATAOUT[4]: (25, 1, slf_op_4)
 	DATAOUT[5]: (25, 1, slf_op_5)
-	DATAOUT[6]: 
-	DATAOUT[7]: 
-	DATAOUT[8]: 
-	DATAOUT[9]: 
+	DATAOUT[6]: (25, 1, slf_op_6)
+	DATAOUT[7]: (25, 1, slf_op_7)
+	DATAOUT[8]: (25, 2, slf_op_0)
+	DATAOUT[9]: (25, 2, slf_op_1)
 	MASKWREN[0]: (25, 3, lutff_0/in_0)
 	MASKWREN[1]: (25, 3, lutff_1/in_0)
 	MASKWREN[2]: (25, 3, lutff_2/in_0)
 	MASKWREN[3]: (25, 3, lutff_3/in_0)
 	POWEROFF: (25, 4, lutff_4/in_3)
-	SLEEP: (25, 4, lutff_0/in_3) (25, 4, lutff_2/in_3)
-	STANDBY: (25, 1, lutff_7/in_1)
-	WREN: (25, 1, slf_op_0)
+	SLEEP: (25, 4, lutff_2/in_3)
+	STANDBY: (25, 4, lutff_0/in_3)
+	WREN: (25, 3, lutff_4/in_1)
 SPRAM 25 0 4
 	ADDRESS[0]: (25, 2, lutff_6/in_0)
 	ADDRESS[10]: (25, 3, lutff_0/in_1)
 	ADDRESS[11]: (25, 3, lutff_1/in_1)
-	ADDRESS[12]: (25, 4, lutff_3/in_3)
+	ADDRESS[12]: (25, 3, lutff_2/in_1)
 	ADDRESS[13]: (25, 3, lutff_3/in_1)
 	ADDRESS[1]: (25, 2, lutff_7/in_0)
 	ADDRESS[2]: (25, 3, lutff_0/in_3)
@@ -192,11 +192,11 @@ SPRAM 25 0 4
 	C_SPRAM_EN: (25, 1, CBIT_1)
 	DATAIN[0]: (25, 1, lutff_0/in_0)
 	DATAIN[10]: (25, 2, lutff_2/in_3)
-	DATAIN[11]: 
+	DATAIN[11]: (25, 2, lutff_3/in_3)
 	DATAIN[12]: (25, 2, lutff_4/in_3)
-	DATAIN[13]: 
+	DATAIN[13]: (25, 2, lutff_5/in_3)
 	DATAIN[14]: (25, 2, lutff_6/in_3)
-	DATAIN[15]: (25, 2, lutff_5/in_3)
+	DATAIN[15]: (25, 2, lutff_7/in_3)
 	DATAIN[1]: (25, 1, lutff_1/in_0)
 	DATAIN[2]: (25, 1, lutff_2/in_0)
 	DATAIN[3]: (25, 1, lutff_3/in_0)
@@ -206,27 +206,27 @@ SPRAM 25 0 4
 	DATAIN[7]: (25, 1, lutff_7/in_0)
 	DATAIN[8]: (25, 2, lutff_0/in_3)
 	DATAIN[9]: (25, 2, lutff_1/in_3)
-	DATAOUT[0]: (25, 3, lutff_5/in_1) (25, 3, slf_op_0)
+	DATAOUT[0]: (25, 3, slf_op_0)
 	DATAOUT[10]: (25, 4, slf_op_2)
-	DATAOUT[11]: 
-	DATAOUT[12]: 
-	DATAOUT[13]: (25, 4, slf_op_6)
-	DATAOUT[14]: 
-	DATAOUT[15]: 
+	DATAOUT[11]: (25, 4, slf_op_3)
+	DATAOUT[12]: (25, 4, slf_op_4)
+	DATAOUT[13]: (25, 4, slf_op_5)
+	DATAOUT[14]: (25, 4, slf_op_6)
+	DATAOUT[15]: (25, 4, slf_op_7)
 	DATAOUT[1]: (25, 3, slf_op_1)
 	DATAOUT[2]: (25, 3, slf_op_2)
 	DATAOUT[3]: (25, 3, slf_op_3)
 	DATAOUT[4]: (25, 3, slf_op_4)
 	DATAOUT[5]: (25, 3, slf_op_5)
-	DATAOUT[6]: 
-	DATAOUT[7]: 
-	DATAOUT[8]: 
-	DATAOUT[9]: 
+	DATAOUT[6]: (25, 3, slf_op_6)
+	DATAOUT[7]: (25, 3, slf_op_7)
+	DATAOUT[8]: (25, 4, slf_op_0)
+	DATAOUT[9]: (25, 4, slf_op_1)
 	MASKWREN[0]: (25, 3, lutff_4/in_0)
 	MASKWREN[1]: (25, 3, lutff_5/in_0)
 	MASKWREN[2]: (25, 3, lutff_6/in_0)
 	MASKWREN[3]: (25, 3, lutff_7/in_0)
 	POWEROFF: (25, 4, lutff_5/in_3)
-	SLEEP: (25, 4, lutff_1/in_3) (25, 4, lutff_3/in_3)
-	STANDBY: (25, 2, lutff_7/in_3)
-	WREN: 
+	SLEEP: (25, 4, lutff_3/in_3)
+	STANDBY: (25, 4, lutff_1/in_3)
+	WREN: (25, 3, lutff_5/in_1)
