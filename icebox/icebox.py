@@ -507,12 +507,23 @@ class iceconfig:
                         
                         if self.device == "5k":
                             m = re.match("span4_vert_([lrtb])_(\d+)$", vert_net)
+
                             assert m
+                            idx = int(m.group(2))
+                            if idx < 4:
+                                if (s[0] == 0 and s[1] == 0 and direction == "l") or (s[0] == self.max_x and s[1] == self.max_y and direction == "r"):
+                                    continue
                             vert_net = "sp4_v_%s_%d" % (m.group(1), int(m.group(2)) + 28)
 
                             m = re.match("span4_horz_([lrtb])_(\d+)$", horz_net)
                             assert m
+                            idx = int(m.group(2))
+                            if idx < 32:
+                                if (s[0] == 0 and s[1] == 0 and direction == "b") or (s[0] == self.max_x and s[1] == self.max_y and direction == "t"):
+                                    continue
                             horz_net = "span4_horz_%s_%d" % (m.group(1), int(m.group(2)) - 28)
+                            
+                            
                             
                         if s[0] == 0 and s[1] == 0:
                             if direction == "l": s = (0, 1, vert_net)
@@ -528,10 +539,18 @@ class iceconfig:
                         if self.device == "5k":    
                             m = re.match("(span4_vert|sp4_v)_([lrtb])_(\d+)$", vert_net)
                             assert m
+                            idx = int(m.group(3))
+                            if idx < 4:
+                                if (s[0] == 0 and s[1] == self.max_y and direction == "l") or (s[0] == self.max_x and s[1] == 0 and direction == "r"):
+                                    continue
                             vert_net = "sp4_v_%s_%d" % (m.group(2), int(m.group(3)) + 28)
                             
                             m = re.match("(span4_horz|sp4_h)_([lrtb])_(\d+)$", horz_net)
                             assert m
+                            idx = int(m.group(3))
+                            if idx < 32:
+                                if (s[0] == 0 and s[1] == self.max_y and direction == "t") or (s[0] == self.max_x and s[1] == 0 and direction == "n"):
+                                    continue
                             horz_net = "span4_horz_%s_%d" % (m.group(2), int(m.group(3)) - 28)
                             
                         if s[0] == 0 and s[1] == self.max_y:
