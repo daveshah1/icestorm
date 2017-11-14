@@ -444,7 +444,50 @@ class iceconfig:
                 assert False
 
         return funcnets
-
+    
+    #UltraPlus corner routing: given the corner name and net index,
+    #return a tuple containing H and V indexes, or none if NA
+    def ultraplus_trace_corner(self, corner, idx):
+        h_idx = None
+        v_idx = None
+        if corner == "bl":
+            if idx >= 4:
+                v_idx = idx + 28
+            if idx >= 32 and idx < 48:
+                h_idx = idx - 28
+        elif corner == "tl":
+            #TODO: bounds check for v_idx case?
+            v_idx = (idx + 6) ^ 1
+            if idx >= 6 and idx < 18:
+                h_idx = (idx ^ 1) - 6
+        elif corner == "tr":
+            #TODO: bounds check for v_idx case?
+            v_idx = (idx + 12) ^ 1
+            if idx >= 12 and idx < 24:
+                h_idx = (idx ^ 1) - 12            
+        elif corner == "br":
+            #TODO: bounds check for v_idx case?
+            v_idx = idx + 32
+            if idx >= 32 and idx < 48: #check
+                h_idx = idx - 32
+        return (h_idx, v_idx)
+    
+    def get_corner(self, x, y):
+        corner = ""
+        if y == 0:
+            corner += "b"
+        elif y == self.max_y:
+            corner += "t"
+        else:
+            corner += "x"
+        if x == 0:
+            corner += "l"
+        elif x == self.max_x:
+            corner += "r"
+        else:
+            corner += "x"
+        return corner    
+    
     def follow_net(self, netspec):
         x, y, netname = netspec
         neighbours = self.rlookup_funcnet(x, y, netname)
@@ -465,7 +508,7 @@ class iceconfig:
                         neighbours.add((nx, ny, netname))
 
         match = re.match(r"sp4_r_v_b_(\d+)", netname)
-        if match and ((0 < x < self.max_x-1) or (self.device == "5k")):
+        if match and ((0 < x < self.max_x-1) or (self.device == "5k" and (x < self.max_x))):
             neighbours.add((x+1, y, sp4v_normalize("sp4_v_b_" + match.group(1))))
         #print('\tafter r_v_b', neighbours)
 
@@ -507,21 +550,24 @@ class iceconfig:
                         
                         if self.device == "5k":
                             m = re.match("span4_vert_([lrtb])_(\d+)$", vert_net)
-
                             assert m
                             idx = int(m.group(2))
-                            if idx < 4:
+                            h_idx, v_idx = self.ultraplus_trace_corner(self.get_corner(s[0], s[1]), idx)
+                            if v_idx is None:
                                 if (s[0] == 0 and s[1] == 0 and direction == "l") or (s[0] == self.max_x and s[1] == self.max_y and direction == "r"):
                                     continue
-                            vert_net = "sp4_v_%s_%d" % (m.group(1), int(m.group(2)) + 28)
+                            else:    
+                                vert_net = "sp4_v_%s_%d" % (m.group(1), v_idx)
 
                             m = re.match("span4_horz_([lrtb])_(\d+)$", horz_net)
                             assert m
                             idx = int(m.group(2))
-                            if idx < 32:
+                            h_idx, v_idx = self.ultraplus_trace_corner(self.get_corner(s[0], s[1]), idx)
+                            if h_idx is None:
                                 if (s[0] == 0 and s[1] == 0 and direction == "b") or (s[0] == self.max_x and s[1] == self.max_y and direction == "t"):
                                     continue
-                            horz_net = "span4_horz_%s_%d" % (m.group(1), int(m.group(2)) - 28)
+                            else:
+                                horz_net = "span4_horz_%s_%d" % (m.group(1), h_idx)
                             
                             
                             
@@ -540,18 +586,22 @@ class iceconfig:
                             m = re.match("(span4_vert|sp4_v)_([lrtb])_(\d+)$", vert_net)
                             assert m
                             idx = int(m.group(3))
-                            if idx < 4:
+                            h_idx, v_idx = self.ultraplus_trace_corner(self.get_corner(s[0], s[1]), idx)
+                            if v_idx is None:
                                 if (s[0] == 0 and s[1] == self.max_y and direction == "l") or (s[0] == self.max_x and s[1] == 0 and direction == "r"):
                                     continue
-                            vert_net = "sp4_v_%s_%d" % (m.group(2), int(m.group(3)) + 28)
+                            else:
+                                vert_net = "sp4_v_%s_%d" % (m.group(2), v_idx)
                             
                             m = re.match("(span4_horz|sp4_h)_([lrtb])_(\d+)$", horz_net)
                             assert m
                             idx = int(m.group(3))
-                            if idx < 32:
-                                if (s[0] == 0 and s[1] == self.max_y and direction == "t") or (s[0] == self.max_x and s[1] == 0 and direction == "n"):
+                            h_idx, v_idx = self.ultraplus_trace_corner(self.get_corner(s[0], s[1]), idx)
+                            if h_idx is None:
+                                if (s[0] == 0 and s[1] == self.max_y and direction == "t") or (s[0] == self.max_x and s[1] == 0 and direction == "b"):
                                     continue
-                            horz_net = "span4_horz_%s_%d" % (m.group(2), int(m.group(3)) - 28)
+                            else:
+                                horz_net = "span4_horz_%s_%d" % (m.group(2), h_idx)
                             
                         if s[0] == 0 and s[1] == self.max_y:
                             if direction == "l": s = (0, self.max_y-1, vert_net)
