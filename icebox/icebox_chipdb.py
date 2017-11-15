@@ -304,6 +304,17 @@ for pllid in ic.pll_list():
             print("%s %s" % (key, " ".join([str(k) for k in pllinfo[key]])))
     print()
 
+for dsploc in ic.dsp_tiles[0]:
+    x, y = dsploc
+    print(".extra_cell %d %d 0 MAC16" % dsploc)
+    nets = ic.get_dsp_nets_db(x, y)
+    for key in sorted(nets):
+        print("%s %s" % (key, " ".join([str(k) for k in nets[key]])))
+    
+    cfg = ic.get_dsp_config_db(x, y)
+    for key in sorted(cfg):
+        print("%s %s" % (key, " ".join([str(k) for k in cfg[key]])))
+           
 print(".extra_bits")
 extra_bits = dict()
 for idx in sorted(ic.extra_bits_db()):
