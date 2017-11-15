@@ -467,9 +467,9 @@ class iceconfig:
                 h_idx = (idx ^ 1) - 8
         elif corner == "tr":
             #TODO: bounds check for v_idx case?
-            if idx <= 24:
+            if idx <= 16:
                 v_idx = (idx + 12) ^ 1
-            if idx >= 12 and idx < 36:
+            if idx >= 12 and idx < 28:
                 h_idx = (idx ^ 1) - 12            
         elif corner == "br":
             #TODO: bounds check for v_idx case?
