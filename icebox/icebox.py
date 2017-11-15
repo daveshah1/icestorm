@@ -297,7 +297,7 @@ class iceconfig:
             cx, cy, cbit = default_db[cfgkey]
             if cfgkey in override:
                 cx, cy, cbit = override[cfgkey]
-            merged[cbit] = (x + cx, y + cy, cbit)
+            merged[cfgkey] = (x + cx, y + cy, cbit)
         return merged
     
     def tile_db(self, x, y):
