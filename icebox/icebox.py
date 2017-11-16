@@ -263,7 +263,7 @@ class iceconfig:
             "ADDSUBTOP":    (x, y+3, "lutff_3/in_0"),
             "ADDSUBBOT":    (x, y+0, "lutff_3/in_0"),
             "OLOADTOP":     (x, y+3, "lutff_2/in_0"),
-            "ADDSUBBOT":    (x, y+0, "lutff_2/in_0"),
+            "OLOADBOT":    (x, y+0, "lutff_2/in_0"),
             "CI":           (x, y+0, "lutff_4/in_0"),
             "CO":           (x, y+4, "slf_op_0")
         }
@@ -4453,6 +4453,12 @@ ramttile_8k_db = parse_db(iceboxdb.database_ramt_8k_txt, "8k")
 ipcon_5k_db = parse_db(iceboxdb.database_ipcon_5k_txt, "5k")
 dsp0_5k_db = parse_db(iceboxdb.database_dsp0_5k_txt, "5k")
 dsp1_5k_db = parse_db(iceboxdb.database_dsp1_5k_txt, "5k")
+
+#This bit doesn't exist in DB because icecube won't ever set it,
+#but it exists
+dsp1_5k_db.append([["B4[7]"], "IpConfig", "CBIT_5"])
+
+
 dsp2_5k_db = parse_db(iceboxdb.database_dsp2_5k_txt, "5k")
 dsp3_5k_db = parse_db(iceboxdb.database_dsp3_5k_txt, "5k")
 
