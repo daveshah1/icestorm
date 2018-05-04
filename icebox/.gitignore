@@ -2,4 +2,5 @@ chipdb-1k.txt
 chipdb-5k.txt
 chipdb-8k.txt
 chipdb-384.txt
+chipdb-tiny.txt
 __pycache__

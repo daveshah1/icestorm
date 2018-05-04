@@ -37,6 +37,24 @@ class iceconfig:
         self.extra_bits = set()
         self.symbols = dict()
 
+    def setup_empty_tiny(self):
+        self.clear()
+        self.device = "tiny"
+        self.max_x = 3
+        self.max_y = 4
+
+        for x in range(1, self.max_x):
+            for y in range(1, self.max_y):
+                self.logic_tiles[(x, y)] = ["0" * 54 for i in range(16)]
+
+        for x in range(1, self.max_x):
+            self.io_tiles[(x, 0)] = ["0" * 18 for i in range(16)]
+            self.io_tiles[(x, self.max_y)] = ["0" * 18 for i in range(16)]
+
+        for y in range(1, self.max_y):
+            self.io_tiles[(0, y)] = ["0" * 18 for i in range(16)]
+            self.io_tiles[(self.max_x, y)] = ["0" * 18 for i in range(16)]
+
     def setup_empty_384(self):
         self.clear()
         self.device = "384"
@@ -152,6 +170,7 @@ class iceconfig:
 
     def pinloc_db(self):
         if self.device == "384": return pinloc_db["384-qn32"]
+        if self.device == "tiny": return pinloc_db["tiny-qn32"]
         if self.device == "1k": return pinloc_db["1k-tq144"]
         if self.device == "5k": return pinloc_db["5k-sg48"]
         if self.device == "8k": return pinloc_db["8k-ct256"]
@@ -180,6 +199,8 @@ class iceconfig:
         if self.device == "8k":
             return ["8k_0", "8k_1"]
         if self.device == "384":
+            return [ ]
+        if self.device == "tiny":
             return [ ]
         assert False
     
@@ -241,6 +262,13 @@ class iceconfig:
                     entries.append((x, src_y, x, y))
             return entries
 
+        if self.device == "tiny":
+            entries = list()
+            for x in range(self.max_x+1):
+                for y in range(self.max_y+1):
+                    src_y = 1
+                    entries.append((x, src_y, x, y))
+            return entries
         assert False
         
     # Return a map between HDL name and routing net and location for a given DSP cell    
@@ -302,7 +330,7 @@ class iceconfig:
     
     def tile_db(self, x, y):
         # Only these devices have IO on the left and right sides.
-        if self.device in ["384", "1k", "8k"]:
+        if self.device in ["tiny", "384", "1k", "8k"]:
           if x == 0: return iotile_l_db
           if x == self.max_x: return iotile_r_db
         # The 5k needs an IO db including the extra bits
@@ -330,7 +358,7 @@ class iceconfig:
             if (x, y) in self.logic_tiles: return logictile_8k_db
             if (x, y) in self.ramb_tiles: return rambtile_8k_db
             if (x, y) in self.ramt_tiles: return ramttile_8k_db
-        elif self.device == "384":
+        elif self.device == "384" or self.device == "tiny":
             if (x, y) in self.logic_tiles: return logictile_384_db
 
         print("Tile type unknown at (%d, %d)" % (x, y))
@@ -718,6 +746,8 @@ class iceconfig:
                 add_seed_segments(idx, tile, logictile_8k_db)
             elif self.device == "384":
                 add_seed_segments(idx, tile, logictile_384_db)
+            elif self.device == "tiny":
+                add_seed_segments(idx, tile, logictile_384_db)
             else:
                 assert False
 
@@ -881,7 +911,7 @@ class iceconfig:
                     self.extra_bits.add((int(line[1]), int(line[2]), int(line[3])))
                     continue
                 if line[0] == ".device":
-                    assert line[1] in ["1k", "5k", "8k", "384"]
+                    assert line[1] in ["1k", "5k", "8k", "384", "tiny"]
                     self.device = line[1]
                     continue
                 if line[0] == ".warmboot":
@@ -1407,6 +1437,16 @@ extra_bits_db = {
         (1, 181, 78): ("padin_glb_netwk", "5"),
         (0, 180, 79): ("padin_glb_netwk", "6"),
         (0, 181, 79): ("padin_glb_netwk", "7"),
+    },
+    "tiny": {
+        (0, 180, 78): ("padin_glb_netwk", "0"),
+        (0, 181, 78): ("padin_glb_netwk", "1"),
+        (1, 180, 79): ("padin_glb_netwk", "2"),
+        (1, 181, 79): ("padin_glb_netwk", "3"),
+        (1, 180, 78): ("padin_glb_netwk", "4"),
+        (1, 181, 78): ("padin_glb_netwk", "5"),
+        (0, 180, 79): ("padin_glb_netwk", "6"),
+        (0, 181, 79): ("padin_glb_netwk", "7"),
     }
 }
 
@@ -1450,6 +1490,16 @@ gbufin_db = {
         ( 7,  5,  2),
         ( 3,  0,  5),
         ( 3,  9,  4),
+    ],
+    "tiny": [
+        ( 0,  1,  0),
+        ( 0,  2,  1),
+        ( 0,  3,  2),
+        ( 1,  0,  3),
+        ( 2,  0,  4),
+        ( 1,  4,  5),
+        ( 2,  4,  6),
+        ( 3,  1,  7),
     ]
 }
 
@@ -1484,6 +1534,9 @@ iolatch_db = {
         ( 2,  0), #384?
         ( 5,  9), #384?
     ],
+    "tiny": [
+        ( 0,  1), 
+    ],
 }
 
 # The x, y cell locations of the WARMBOOT controls. Run tests/sb_warmboot.v
@@ -1509,6 +1562,11 @@ warmbootinfo_db = {
         "BOOT": ( 6, 0, "fabout" ), #384?
         "S0":   ( 7, 1, "fabout" ),
         "S1":   ( 7, 2, "fabout" ),
+    },
+    "tiny": {
+        "BOOT": ( 0, 1, "fabout" ), #384?
+        "S0":   ( 0, 2, "fabout" ),
+        "S1":   ( 0, 3, "fabout" ),
     }
 }
 
@@ -1523,6 +1581,8 @@ noplls_db = {
     "1k-cb121": [ "1k" ],
     "1k-vq100": [ "1k" ],
     "384-qn32": [ "384" ],
+    "tiny-qn32": [ "tiny" ],
+
 }
 
 pllinfo_db = {
@@ -1941,6 +2001,16 @@ padin_pio_db = {
         ( 7,  5, 0),
         ( 3,  0, 1), #QFN32: no pin?!
         ( 3,  9, 1),
+    ],
+    "tiny": [
+        ( 0,  1, 1),
+        ( 0,  2, 1),
+        ( 0,  3, 0),
+        ( 1,  0, 0), #QFN32: no pin?!
+        ( 2,  0, 0),
+        ( 1,  4, 0),
+        ( 2,  4, 1), #QFN32: no pin?!
+        ( 3,  1, 1),
     ]
 }
 
@@ -2352,6 +2422,12 @@ ieren_db = {
         (12,  0,  0, 12,  0,  1),
         (13,  0,  0, 13,  0,  1),
         (12,  0,  1, 12,  0,  0)
+    ],
+    "tiny": [
+        (0, 1, 0, 0, 1, 0),
+        (0, 1, 1, 0, 1, 1),
+        (1, 0, 0, 1, 0, 0),
+        (1, 0, 1, 1, 0, 1),
     ]
 }
 
@@ -4615,7 +4691,14 @@ pinloc_db = {
         ( "F2", 19,  0, 1),
         ( "F4", 12,  0, 1),
         ( "F5",  6,  0, 1),
+    ],
+    "tiny-qn32": [
+        ( "1", 1, 0, 0),
+        ( "1", 1, 0, 1),
+        ( "1", 0, 1, 0),
+        ( "1", 0, 1, 1),
     ]
+
 }
 
 # This database contains the locations of configuration bits of the DSP tiles

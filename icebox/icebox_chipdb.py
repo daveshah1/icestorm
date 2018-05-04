@@ -21,6 +21,7 @@ import getopt, sys, re
 mode_384 = False
 mode_5k = False
 mode_8k = False
+mode_tiny = False
 
 def usage():
     print("""
@@ -38,7 +39,7 @@ Usage: icebox_chipdb [options] [bitmap.asc]
     sys.exit(0)
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "358")
+    opts, args = getopt.getopt(sys.argv[1:], "358t")
 except:
     usage()
 
@@ -49,6 +50,8 @@ for o, a in opts:
         mode_5k = True
     elif o == "-3":
         mode_384 = True
+    elif o == "-t":
+        mode_tiny = True
     else:
         usage()
 
@@ -59,6 +62,8 @@ elif mode_5k:
     ic.setup_empty_5k()
 elif mode_384:
     ic.setup_empty_384()
+elif mode_tiny:
+    ic.setup_empty_tiny()
 else:
     ic.setup_empty_1k()
 
@@ -276,7 +281,7 @@ def print_tile_nonrouting_bits(tile_type, idx):
 
 print_tile_nonrouting_bits("logic", list(ic.logic_tiles.keys())[0])
 print_tile_nonrouting_bits("io", list(ic.io_tiles.keys())[0])
-if not mode_384:
+if not mode_384 and not mode_tiny:
     print_tile_nonrouting_bits("ramb", list(ic.ramb_tiles.keys())[0])
     print_tile_nonrouting_bits("ramt", list(ic.ramt_tiles.keys())[0])
 
