@@ -576,13 +576,13 @@ for cell in iocells:
         net_pad   = seg_to_net((cell[0], cell[1], "io_%d/PAD" % cell[2]))
         net_din0  = seg_to_net((cell[0], cell[1], "io_%d/D_IN_0" % cell[2]), "")
         net_din1  = seg_to_net((cell[0], cell[1], "io_%d/D_IN_1" % cell[2]), "")
-        net_dout0 = seg_to_net((cell[0], cell[1], "io_%d/D_OUT_0" % cell[2]), "0")
-        net_dout1 = seg_to_net((cell[0], cell[1], "io_%d/D_OUT_1" % cell[2]), "0")
-        net_oen   = seg_to_net((cell[0], cell[1], "io_%d/OUT_ENB" % cell[2]), "1")
-        net_cen   = seg_to_net((cell[0], cell[1], "io_global/cen"), "1")
-        net_iclk  = seg_to_net((cell[0], cell[1], "io_global/inclk"), "0")
-        net_oclk  = seg_to_net((cell[0], cell[1], "io_global/outclk"), "0")
-        net_latch = seg_to_net((cell[0], cell[1], "io_global/latch"), "0")
+        net_dout0 = seg_to_net((cell[0], cell[1], "io_%d/D_OUT_0" % cell[2]), "1'b0")
+        net_dout1 = seg_to_net((cell[0], cell[1], "io_%d/D_OUT_1" % cell[2]), "1'b0")
+        net_oen   = seg_to_net((cell[0], cell[1], "io_%d/OUT_ENB" % cell[2]), "1'b1")
+        net_cen   = seg_to_net((cell[0], cell[1], "io_global/cen"), "1'b1")
+        net_iclk  = seg_to_net((cell[0], cell[1], "io_global/inclk"), "1'b0")
+        net_oclk  = seg_to_net((cell[0], cell[1], "io_global/outclk"), "1'b0")
+        net_latch = seg_to_net((cell[0], cell[1], "io_global/latch"), "1'b0")
         iotype = iocells_type[cell]
 
         if cell in iocells_negclk:
